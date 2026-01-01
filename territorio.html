@@ -22,18 +22,22 @@
             border: 1px solid #374151;
         }
         .map-box h4 { color: var(--ouro); margin-bottom: 10px; font-size: 0.8rem; text-transform: uppercase; }
+        
+        /* Botão Ajustado */
         .map-link {
             display: inline-block;
             padding: 8px 15px;
             background: var(--ouro);
             color: #111827;
-            text-decoration: none;
+            cursor: pointer; /* Muda para mãozinha */
+            border: none;
             font-weight: 800;
             font-size: 0.65rem;
             border-radius: 4px;
             transition: 0.3s;
+            text-decoration: none;
         }
-        .map-link:hover { background: #fff; }
+        .map-link:hover { background: #fff; transform: translateY(-2px); }
 
         /* Regiões */
         .regioes-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 50px; }
@@ -104,6 +108,87 @@
             .col-historia { grid-column: span 2; border-top: 1px solid #eee; }
             .regioes-container, .map-gallery { grid-template-columns: 1fr; }
         }
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-container {
+            position: relative;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .fechar-modal {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--ouro);
+            color: #111827;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        #caption-modal {
+            margin-top: 15px;
+            color: #111827;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        /* Janela do Mapa */
+        .modal-mapa {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background: #fff; padding: 10px; border-radius: 15px;
+            max-width: 90%; max-height: 90%; position: relative;
+        }
+        .modal-box img {
+            width: 100%; max-height: 80vh; object-fit: contain; border-radius: 10px;
+        }
+        .fechar-x {
+            position: absolute; top: -15px; right: -15px;
+            background: #d4af37; color: #000; width: 35px; height: 35px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: bold; font-size: 20px; border: 2px solid #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -134,12 +219,13 @@
         <h2 class="titulo-destaque">mapas</h2>
 
         <div class="map-gallery">
-            <div class="map-box"><h4>Mapa da Federação</h4><a href="img/mapa-federacao.png" class="map-link">VER MAPA</a></div>
-            <div class="map-box"><h4>Mapa dos Estados</h4><a href="img/mapa-estados.png" class="map-link">VER MAPA</a></div>
-            <div class="map-box"><h4>Mapa dos Distritos</h4><a href="img/mapa-distritos.png" class="map-link">VER MAPA</a></div>
-            <div class="map-box"><h4>Mapa das Regiões</h4><a href="img/mapa-regioes.png" class="map-link">VER MAPA</a></div>
-            <div class="map-box"><h4>Mapa das Propostas</h4><a href="img/mapa-propostas.png" class="map-link">VER MAPA</a></div>
+            <div class="map-box"><h4>Mapa da Federação</h4><a href="javascript:void(0)" onclick="abrirMapa('img/mapa-federacao.png', 'Mapa da Federação')" class="map-link">VER MAPA</a></div>
+            <div class="map-box"><h4>Mapa dos Estados</h4><a href="javascript:void(0)" onclick="abrirMapa('img/mapa-estados.png', 'Mapa dos Estados')" class="map-link">VER MAPA</a></div>
+            <div class="map-box"><h4>Mapa dos Distritos</h4><a href="javascript:void(0)" onclick="abrirMapa('img/mapa-distritos.png', 'Mapa dos Distritos')" class="map-link">VER MAPA</a></div>
+            <div class="map-box"><h4>Mapa das Regiões</h4><a href="javascript:void(0)" onclick="abrirMapa('img/mapa-regioes.png', 'Mapa das Regiões')" class="map-link">VER MAPA</a></div>
+            <div class="map-box"><h4>Mapa das Propostas</h4><a href="javascript:void(0)" onclick="abrirMapa('img/mapa-propostas.png', 'Mapa das Propostas')" class="map-link">VER MAPA</a></div>
         </div>
+    </section>
     </section>
 
     <div class="state-full-card" style="border-top: 6px solid var(--ouro);">
@@ -505,6 +591,14 @@
     </div>
 
     </main>
+    <div id="janelaMapa" class="modal-mapa" onclick="fecharMapa()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <span class="fechar-x" onclick="fecharMapa()">&times;</span>
+            <img id="imgDinamica" src="">
+            <p id="tituloMapa" style="text-align:center; font-weight:800; margin-top:10px; color:#333; text-transform:uppercase; font-size:12px;"></p>
+        </div>
+    </div>
+
 
 <footer class="gov-footer">
     <div class="container">
@@ -541,6 +635,40 @@
     </div>
 </footer>
 
+    <script>
+        function abrirMapa(caminhoImg, titulo) {
+            var modal = document.getElementById("modalMapa");
+            var img = document.getElementById("imgNoModal");
+            var caption = document.getElementById("caption-modal");
+            
+            modal.style.display = "flex"; // Mostra a janela
+            img.src = caminhoImg; // Troca a imagem pela que você clicou
+            caption.innerHTML = titulo; // Troca o título
+        }
+
+        function fecharMapa() {
+            var modal = document.getElementById("modalMapa");
+            modal.style.display = "none"; // Esconde a janela
+        }
+
+        // Fecha se o usuário clicar fora da imagem
+        window.onclick = function(event) {
+            var modal = document.getElementById("modalMapa");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        function abrirMapa(url, titulo) {
+            document.getElementById('imgDinamica').src = url;
+            document.getElementById('tituloMapa').innerText = titulo;
+            document.getElementById('janelaMapa').style.display = 'flex';
+        }
+
+        function fecharMapa() {
+            document.getElementById('janelaMapa').style.display = 'none';
+        }
+
+    </script>
 </body>
 
 </html>

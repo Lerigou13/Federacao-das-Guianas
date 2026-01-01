@@ -6,14 +6,12 @@
     <title>Poder Legislativo — Federação das Guianas</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <style>
+        <style>
         :root {
             --azul-gov: #0a2e52;
-            --ouro-gov: #d4af37;}
+            --ouro-gov: #d4af37;
+        }
 
-        /* GRID DAS TRÊS CASAS */
-
-        .intro-legislativo { text-align: center; margin-bottom: 60px; }
         .tag-poder {
             background: var(--ouro-gov);
             color: white;
@@ -23,7 +21,35 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
+            display: inline-block;
         }
+
+        /* NOVO: Grid do Palácio do Parlamento (Igual à State House) */
+        .palacio-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            background: white; /* Diferente da State House, este é branco para contrastar com o fundo azul dos cards abaixo */
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .palacio-texto {
+            padding: 50px;
+            color: var(--azul-gov);
+        }
+
+        .palacio-imagem {
+            background-image: url('img/parlamento.png'); /* COLOQUE O NOME DO SEU ARQUIVO AQUI */
+            background-size: cover;
+            background-position: center;
+            min-height: 350px;
+        }
+
+        /* Grid das Três Casas */
         .grid-casas {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -35,58 +61,42 @@
             background: var(--azul-gov);
             padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #1e293b;
             text-align: center;
             transition: transform 0.3s ease;
             color: white;
         }
 
+        .card-casa:hover { transform: translateY(-10px); border-color: var(--ouro-gov); }
+
         .img-casa {
-            max-width: 100%; 
-            max-height: 200px; /* Limita a altura para não esticar a página */
-            border-radius: 4px;
+            width: 80px; height: 80px; 
+            margin-bottom: 20px;
             object-fit: contain;
         }
 
-        .card-casa:hover { transform: translateY(-10px); border-color: var(--ouro-gov); }
-
-        .casa-icone { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-        .casa-nome { font-size: 1.4rem; color: var(--azul-gov); font-weight: 800; margin-bottom: 5px; display: block; }
+        .casa-nome { font-size: 1.4rem; color: white; font-weight: 800; margin-bottom: 5px; display: block; }
         .casa-sub { font-size: 0.75rem; color: var(--ouro-gov); font-weight: 700; text-transform: uppercase; margin-bottom: 20px; display: block; }
         
         .cadeiras-badge {
-            background: #f1f5f9;
+            background: rgba(255,255,255,0.1);
             padding: 8px 15px;
             border-radius: 10px;
             font-size: 0.85rem;
             font-weight: 700;
-            color: var(--azul-gov);
+            color: var(--ouro-gov);
             display: inline-block;
             margin-bottom: 20px;
         }
 
-        .desc-casa {font-size: 0.95rem; line-height: 1.7; color: white; text-align: justify; }
+        .desc-casa { font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; text-align: justify; }
 
-        /* SEÇÃO PALÁCIO DO PARLAMENTO */
-        .palacio-parlamento {
-            background: var(--branco);
-            border-radius: 20px;
-            padding: 50px;
-            color: var(--azul-gov);
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .info-palacio { flex: 1; }
-        .info-palacio h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--ouro-gov); }
-
-        /* RESPONSIVIDADE */
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
+            .palacio-grid { grid-template-columns: 1fr; }
+            .palacio-imagem { height: 300px; order: 2; }
+            .palacio-texto { order: 1; padding: 40px; }
             .grid-casas { grid-template-columns: 1fr; }
-            .palacio-parlamento { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -117,13 +127,17 @@
         <p style="color: #666;">O Parlamento é o coração da democracia guianense, onde as leis são debatidas e a fiscalização do Executivo é exercida através do equilíbrio entre as três casas legislativas.</p>
     </section>
 
-    <section class="palacio-parlamento">
-        <div class="info-palacio">
-            <h3>Palácio do Parlamento</h3>
-            <p style="line-height: 1.8; opacity: 0.9;">
-                Localizado no complexo cívico de <b>Porto Courantyne</b>, o Palácio do Parlamento é o centro da atividade legislativa nacional. O complexo abriga os plenários das três casas e as comissões parlamentares permanentes, simbolizando a união soberana das Guianas.
+        <section class="palacio-grid">
+        <div class="palacio-texto">
+            <span class="tag-poder" style="margin-bottom: 15px;">Sede do Legislativo</span>
+            <h3 style="font-size: 2rem; margin-bottom: 15px; color: var(--azul-gov);">Palácio do Parlamento</h3>
+            <p style="line-height: 1.8; color: #475569;">
+                Localizado no complexo cívico de <b>Porto Courantyne</b>, o Palácio do Parlamento é o centro da atividade legislativa nacional. O complexo abriga os plenários das três casas e as comissões parlamentares permanentes, simbolizando a união soberana das Guianas e o equilíbrio entre os estados federados.
             </p>
+        </div>
+        <div class="palacio-imagem"></div>
     </section>
+
     <br>
     <div class="grid-casas">
         <div class="card-casa">

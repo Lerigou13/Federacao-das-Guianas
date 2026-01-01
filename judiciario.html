@@ -6,27 +6,37 @@
     <title>Poder Judiciário — Federação das Guianas</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <style>
+        <style>
         :root {
             --azul-gov: #0a2e52;
             --ouro-gov: #d4af37;
         }
 
-        .tag-poder { background: var(--ouro-gov); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .tag-poder { background: var(--ouro-gov); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: inline-block; }
+
+        /* NOVO: Grid do Prédio da Alta Corte */
+        .corte-sede-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+        }
+
+        .corte-texto { padding: 50px; color: var(--azul-gov); }
+
+        .corte-imagem {
+            background-image: url('img/altacorte.png'); 
+            background-size: cover;
+            background-position: center;
+            min-height: 350px;
+        }
 
         /* ALTA CORTE FEDERAL */
-
-        .intro-judiciario { text-align: center; margin-bottom: 60px; }
-        .tag-poder {
-            background: var(--ouro-gov);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
         .alta-corte-card {
             background: var(--branco);
             border-radius: 20px;
@@ -34,23 +44,14 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.06);
             border: 1px solid #e2e8f0;
             margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
             border-top: 7px solid var(--ouro-gov);
-        }
-
-        .alta-corte-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 5px;
         }
 
         .header-corte { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .titulo-corte { color: var(--azul-gov); font-size: 2rem; font-weight: 800; margin: 0; }
         .badge-membros { background: var(--azul-gov); color: white; padding: 8px 15px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
 
-        .texto-judiciario { line-height: 1.8; color: var(--justica-cinza); font-size: 1.1rem; }
+        .texto-judiciario { line-height: 1.8; color: #475569; font-size: 1.1rem; }
 
         /* AS TRÊS CÂMARAS */
         .camaras-grid {
@@ -61,23 +62,24 @@
         }
 
         .camara-item {
-            background: #f1f5f9;
+            background: #f8fafc;
             padding: 25px;
             border-radius: 15px;
             border-top: 4px solid var(--ouro-gov);
             transition: 0.3s;
         }
 
-        .camara-item:hover { transform: translateY(-5px); background: #edf2f7; }
+        .camara-item:hover { transform: translateY(-5px); background: #f1f5f9; }
         .camara-item h4 { color: var(--azul-gov); margin-top: 0; margin-bottom: 10px; font-size: 1rem; }
         .camara-item p { font-size: 0.85rem; color: #64748b; line-height: 1.5; margin: 0; }
 
         /* REQUISITOS E REGRAS */
         .requisitos-secao {
-            margin-top: 60px;
+            margin-top: 20px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
+            margin-bottom: 60px;
         }
 
         .bloco-regra {
@@ -85,9 +87,10 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
         }
 
-        .bloco-regra h3 { color: var(--ouro-gov); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
+        .bloco-regra h3 { color: var(--ouro-gov); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .lista-regras { list-style: none; padding: 0; }
         .lista-regras li { 
             padding: 12px 0; 
@@ -96,11 +99,15 @@
             display: flex; 
             align-items: center; 
             gap: 10px;
+            color: #475569;
         }
         .lista-regras li::before { content: "⚖️"; font-size: 0.8rem; }
 
         /* RESPONSIVIDADE */
         @media (max-width: 900px) {
+            .corte-sede-grid { grid-template-columns: 1fr; }
+            .corte-imagem { height: 250px; order: 2; }
+            .corte-texto { order: 1; padding: 30px; }
             .camaras-grid, .requisitos-secao { grid-template-columns: 1fr; }
             .header-corte { flex-direction: column; text-align: center; gap: 20px; }
         }
@@ -133,6 +140,17 @@
         <p style="color: #666;">Entenda o funcionamento da Alta Corte e as suas funções.</p>
     </section>
     
+        <section class="corte-sede-grid">
+        <div class="corte-texto">
+            <span class="tag-poder" style="margin-bottom: 15px;">Justiça Federal</span>
+            <h3 style="font-size: 2rem; margin-bottom: 15px; color: var(--azul-gov);">Palácio da Justiça</h3>
+            <p style="line-height: 1.8; color: #475569;">
+                O Palácio da Justiça, sede da <b>Alta Corte Federal</b> em Porto Courantyne, é o símbolo da imparcialidade e do império da lei na Federação. Projetado para refletir a transparência e a solidez das instituições guianenses, o edifício abriga os plenários onde se decidem as questões fundamentais da nação.
+            </p>
+        </div>
+        <div class="corte-imagem"></div>
+    </section>
+
     <section class="alta-corte-card">
         <div class="header-corte">
             <h3 class="titulo-corte">Alta Corte Federal</h3>
