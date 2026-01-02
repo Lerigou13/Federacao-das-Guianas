@@ -31,6 +31,56 @@
             letter-spacing: 1px;
         }
 
+        .ineg-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            background: var(--azul-gov);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 50px;
+            min-height: 450px;
+            align-items: stretch;
+        }
+
+        .ineg-texto-topo { 
+            padding: 60px; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+        }
+
+        .ineg-imagem-topo {
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .ineg-imagem-topo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .tag-ineg {
+            background: var(--verde);
+            color: var(--branco);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block; 
+            align-self: flex-start;
+            width: fit-content;
+        }
+
+
         .tabela-wrapper { border: 1px solid #e9ecef; border-radius: 8px; overflow: hidden; margin-bottom: 50px; }
         .ineg-table { width: 100%; border-collapse: collapse; }
         .ineg-table td { padding: 25px; border-bottom: 1px solid #f1f3f5; vertical-align: top; }
@@ -182,6 +232,18 @@
             .grid-7 .map-card:last-child { grid-column: span 2; }
         }
 
+        @media (max-width: 900px) {
+            .ineg-hero-grid { 
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .ineg-texto-topo { order: 1; padding: 40px; }
+            .ineg-imagem-topo { 
+                order: 2; 
+                height: 350px;
+            }
+        }
+
         @media (min-width: 900px) {
             .grid-7 { grid-template-columns: repeat(3, 1fr); }
             .grid-7 .map-card:last-child { grid-column: span 3; }
@@ -221,6 +283,19 @@
         <div class="tag verde">INEG</div>
         <h2>Instituto Nacional Estatístico, Ecológico e Geográfico Guianense</h2>
         <p style="color: #666;">Veja informações do INEG.</p>
+    </section>
+    <section class="ineg-hero-grid">
+        <div class="ineg-texto-topo">
+            <span class="tag-ineg">Instituto Nacional</span>
+            <h2 style="font-size: 2.5rem; color: white; margin: 10px 0;">Missão Institucional</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+                O INEG é o pilar da inteligência geográfica e estatística da Federação, 
+                unindo dados ecológicos e demográficos para o planejamento soberano do território.
+            </p>
+        </div>
+        <div class="ineg-imagem-topo">
+            <img src="img/ineg.png" alt="INEG">
+        </div>
     </section>
     <h2 class="titulo-destaque">Plebiscitos e Referendos Históricos</h2>
 
