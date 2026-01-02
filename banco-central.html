@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Central — Federação das Guianas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Lora:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --azul-gov: #0a2e52;
+            --ouro-gov: #d4af37;
+            --verde-gov: #178921;
+            --cinza-claro: #f4f7f9;
+            --grafite: #2d3436;
+        }
+
+        .banco-hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            background: var(--azul-gov);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--ouro-gov);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-top: 50px;
+        }
+
+        .banco-texto-topo { padding: 60px; color: white; }
+        
+        .banco-imagem-topo {
+            background: linear-gradient(45deg, #0a2e52, #1a4a7a);
+            background-image: url('img/banco-central.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tag-banco {
+            background: var(--ouro-gov);
+            color: var(--azul-gov);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .secao-topico {
+            margin: 60px 0;
+        }
+
+        .secao-topico h2 {
+            font-size: 2rem;
+            color: var(--azul-gov);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--ouro-gov);
+            padding-bottom: 10px;
+        }
+
+        .card-institucional {
+            background: var(--cinza-claro);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-left: 8px solid var(--azul-gov);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .grid-funcoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+        }
+
+        .card-funcao {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 200px;
+        }
+
+        .card-funcao:hover {
+            border-color: var(--ouro-gov);
+            transform: translateY(-5px);
+        }
+
+        .card-funcao h3 {
+            color: var(--azul-gov);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-funcao p {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .painel-moeda {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            border: 1px solid #d4af37;
+        }
+
+        .info-moeda h3 {
+            font-size: 1.8rem;
+            color: var(--azul-gov);
+            margin-bottom: 10px;
+        }
+
+        .valor-cambio {
+            font-size: 1.1rem;
+            color: var(--verde-gov);
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .img-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-especial-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px !important;
+        }
+
+        .card-especial-item img {
+            width: 120px; 
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .card-especial-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .banco-hero-grid { grid-template-columns: 1fr; }
+            .painel-moeda { flex-direction: column; text-align: center; }
+            .banco-imagem-topo { height: 300px; order: 2; }
+        }
+
+        @media (max-width: 1100px) {
+            .grid-funcoes {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .grid-funcoes {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <div class="brand">
+            <img src="img/brasao.png" alt="Brasão">
+            <div class="brand-text">
+                <h1>FEDERAÇÃO DAS GUIANAS</h1>
+                <p class="lema-topo">UNIDADES NA UNIÃO</p>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <a href="index.html">INÍCIO</a>
+            <a href="cultura.html" class="active">CULTURA</a>
+            <a href="ministerios.html">MINISTÉRIOS</a>
+            <a href="educacao.html">EDUCAÇÃO</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section style="padding: 40px 0 20px 0;">
+        <div class="tag verde">OUTROS</div>
+        <h2 class="titulo-destaque">Banco Central das Guianas</h2>
+        <p style="color: #666;">Garantindo a estabilidade do poder de compra da moeda e a solidez do sistema financeiro nacional para o progresso de todos os guianenses.</p>
+    </section>
+    <section class="banco-hero-grid">
+        <div class="banco-texto-topo">
+            <span class="tag-banco">Central Monetária</span>
+            <h2 style="font-size: 2.5rem; color: white; margin: 10px 0;">Missão Institucional</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+                O Banco Central das Guianas (BCG) é uma autarquia de natureza especial, dotada de autonomia operacional para executar as políticas monetárias e cambiais definidas pelo Conselho Monetário Nacional. Atuamos como o guardião da economia, monitorando a inflação e assegurando que o sistema bancário opere com transparência e segurança.
+            </p>
+        </div>
+        <div class="banco-imagem-topo"></div>
+    </section>
+
+        <section class="secao-topico">
+        <h2>A Moeda Nacional</h2>
+        
+        <div class="card-institucional" style="border-left-color: var(--ouro-gov); background: white;">
+            <p>O <strong>Aruak</strong> é a unidade monetária oficial da Federação das Guianas. Símbolo de nossa soberania e integração econômica, a moeda homenageia em sua face principal <strong>Guilerma</strong>, a figura central da pátria, enquanto seus versos celebram a geografia e a arquitetura das nossas dez províncias e distritos.</p>
+        </div>
+
+        <div class="grid-funcoes" style="grid-template-columns: 1fr 1fr; gap: 30px;">
+            
+            <div class="card-funcao" style="min-height: auto;">
+                <h3 style="border-bottom: 2px solid var(--ouro-gov); padding-bottom: 10px;">Moedas</h3>
+                <div class="container-img-moeda">
+                    <img src="img/todas-moedas.png" alt="Conjunto de Moedas Aruak" class="img-full-width">
+                </div>
+                <p>Subdividido em 100 centavos, o Aruak possui cunhagem em materiais nobres:</p>
+                <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #475569;">
+                    <li style="margin-bottom: 10px;"><strong>1 Centavo:</strong> Bronze (Cor Marrom)</li>
+                    <li style="margin-bottom: 10px;"><strong>5 Centavos:</strong> Bronze (Cor Vermelha)</li>
+                    <li style="margin-bottom: 10px;"><strong>10 Centavos:</strong> Prata banhada a Ouro (Dourada)</li>
+                    <li style="margin-bottom: 10px;"><strong>25 Centavos:</strong> Prata banhada a Bronze (Azul)</li>
+                    <li style="margin-bottom: 10px;"><strong>50 Centavos:</strong> Prata (Prateada)</li>
+                    <li style="margin-bottom: 10px;"><strong>1 Aruak:</strong> Bimetálica (Anel de Prata e Centro Dourado)</li>
+                </ul>
+            </div>
+
+            <div class="card-funcao" style="min-height: auto;">
+                <h3 style="border-bottom: 2px solid var(--verde-gov); padding-bottom: 10px;">Notas em Circulação</h3>
+                <div class="container-img-nota">
+                    <img src="img/todas-notas.png" alt="Conjunto de Notas Aruak" class="img-full-width">
+                </div>
+                <p>As cédulas representam os marcos naturais e históricos da Federação:</p>
+                <ul style="list-style: none; padding: 0; font-size: 0.85rem; color: #475569;">
+                    <li style="margin-bottom: 10px;"><strong>2 (Azul):</strong> Catedral de São Jorge (Guiana)</li>
+                    <li style="margin-bottom: 10px;"><strong>5 (Verde):</strong> Jardim das Palmeiras (Suriname)</li>
+                    <li style="margin-bottom: 10px;"><strong>10 (Marrom):</strong> Ilhas da Salvação (Oiapoque)</li>
+                    <li style="margin-bottom: 10px;"><strong>20 (Laranja):</strong> Monte Roraima (Rio Branco)</li>
+                    <li style="margin-bottom: 10px;"><strong>50 (Roxo):</strong> Fortaleza de São José (Amapá)</li>
+                    <li style="margin-bottom: 10px;"><strong>100 (Vermelho):</strong> Salto Ángel (Bolívar/Guayana)</li>
+                    <li style="margin-bottom: 10px;"><strong>200 (Cinza):</strong> Floresta Amazônica (Amazonas/Trombetas)</li>
+                    <li style="margin-bottom: 10px;"><strong>500 (Rosa):</strong> Delta do Rio Orinoco (Delta Amacuro)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <h3 style="color: var(--azul-gov); font-weight: 800; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 20px;">Edições Especiais de 1 Aruak</h3>
+            <div class="grid-funcoes">
+                <div class="card-funcao card-especial-item" style="border-top: 4px solid #3498db;">
+                    <img src="img/moeda-2021.png" alt="Edição 2021">
+                    <strong style="color: #3498db;">2021: Trindade e Tobago</strong>
+                    <p style="font-size: 0.85rem;">Centro azul; talhado com o mapa das ilhas em homenagem ao Tratado de Scarborough.</p>
+                </div>
+                <div class="card-funcao card-especial-item" style="border-top: 4px solid #27ae60;">
+                    <img src="img/moeda-2022-bandeira.png" alt="Edição 2022 Bandeira">
+                    <strong style="color: #27ae60;">2022: Bandeira (90 anos)</strong>
+                    <p style="font-size: 0.85rem;">Centro verde; talhado com a Bandeira da Federação das Guianas.</p>
+                </div>
+                <div class="card-funcao card-especial-item" style="border-top: 4px solid #e74c3c;">
+                    <img src="img/moeda-2022-mapa.png" alt="Edição 2022 Mapa">
+                    <strong style="color: #e74c3c;">2022: Mapa (90 anos)</strong>
+                    <p style="font-size: 0.85rem;">Centro vermelho; talhado com o mapa completo da extensão territorial da Federação.</p>
+                </div>
+                <div class="card-funcao card-especial-item" style="border-top: 4px solid #8e44ad;">
+                    <img src="img/moeda-2025.png" alt="Edição 2025">
+                    <strong style="color: #8e44ad;">2025: Povos Aruak</strong>
+                    <p style="font-size: 0.85rem;">Centro roxo; talhado com uma comunidade Aruak em homenagem aos povos originários.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao-topico">
+        <h2>Principais Funções</h2>
+        <div class="grid-funcoes">
+            <div class="card-funcao">
+                <h3>Estabilidade de Preços</h3>
+                <p>Controle da inflação através da regulação da taxa básica de juros e controle da oferta de moeda na economia.</p>
+            </div>
+            <div class="card-funcao">
+                <h3>Emissão de Moeda</h3>
+                <p>Direito exclusivo de emissão de cédulas e moedas metálicas em todo o território da Federação.</p>
+            </div>
+            <div class="card-funcao">
+                <h3>Reserva Cambial</h3>
+                <p>Gestão das reservas internacionais em ouro e moedas estrangeiras para garantir a liquidez externa do país.</p>
+            </div>
+            <div class="card-funcao">
+                <h3>Fiscalização Bancária</h3>
+                <p>Monitoramento contínuo das instituições financeiras para prevenir riscos sistêmicos e lavagem de dinheiro.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="gov-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="container footer-grid">
+                <div class="footer-info">
+                    <img src="img/brasao.png" alt="Brasão Branco" style="filter: brightness(0) invert(1); width: 80px;">
+                    <h4>Governo da Federação das Guianas</h4>
+                    <p>Portal Oficial</p>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contatos</h4>
+                <p>State House, Porto Courantyne</p>
+                <p>Distrito Federal de Courantyne</p>
+                <div class="social-links">
+                    <span>Gov.fg</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright-area">
+                <span>©</span>
+                <p>2025 Governo da Federação das Guianas. Todos os direitos reservados.</p>
+            </div>
+            <div class="footer-column">
+                <a href="#">Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Acessibilidade</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
