@@ -6,154 +6,16 @@
     <title>Federação das Guianas — Portal Oficial</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
+    <script src="js/script.js"></script>
 </head>
 <body>
 
-<header>
-    <div class="header-flex">
-        <a href="index.html" class="brand-link">
-            <div class="brand">
-                <img src="img/brasao.png" alt="Brasão da Federação">
-                <div class="brand-text">
-                    <h1>FEDERAÇÃO DAS GUIANAS</h1>
-                    <p class="lema-topo">UNIDADES NA UNIÃO</p>
-                </div>
-            </div>
-        </a>
+<div id="header-placeholder"></div>
 
-        <button class="mobile-menu-btn" onclick="toggleMenu(event)">
-            <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <span class="menu-label">MENU</span>
-        </button>
-        
-        <nav class="nav-menu" id="main-nav">
-            <button class="close-menu" onclick="toggleMenu(event)">&times;</button>
-            
-            <a href="index.html" class="nav-item">INÍCIO</a>
-
-            <div class="dropdown">
-                <span class="nav-item">IDENTIDADE</span>
-                <div class="dropdown-content">
-                    <a href="historia.html">História da Federação</a>
-                    <a href="simbolos.html">Símbolos Nacionais</a>
-                    <a href="governantes.html">Lista de Governantes</a>
-                    <a href="partidos.html">Partidos Políticos</a>
-                    <a href="cultura.html">Cultura</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">TERRITÓRIO</span>
-                <div class="dropdown-content">
-                    <a href="territorio.html">Organização Territorial</a>
-                    <a href="mundo.html">Mundo</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">LEGISLAÇÃO</span>
-                <div class="dropdown-content">
-                    <a href="legislacao.html">Constituição</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">GOVERNO</span>
-                <div class="dropdown-content">
-                    <a href="executivo.html">Executivo</a>
-                    <a href="legislativo.html">Legislativo</a>
-                    <a href="judiciario.html">Judiciário</a>
-                    <a href="ministerios.html">Central de Ministérios</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">OUTROS</span>
-                <div class="dropdown-content">
-                    <a href="ineg.html">INEG</a>
-                    <a href="banco-central.html">Banco Central</a>
-                    <a href="forcas_armadas.html">Forças Armadas</a>
-                    <a href="educacao.html">Educação</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-
-<script>
-    function toggleMenu(event) {
-        // Impede que o clique no botão se espalhe e feche o menu imediatamente
-        if (event) {
-            event.stopPropagation();
-        }
-
-        const nav = document.getElementById('main-nav');
-        const isOpen = nav.classList.contains('active');
-
-        if (!isOpen) {
-            nav.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Trava o scroll do site
-        } else {
-            nav.classList.remove('active');
-            document.body.style.overflow = 'auto';   // Libera o scroll do site
-        }
-    }
-
-    document.addEventListener('click', function(event) {
-        const nav = document.getElementById('main-nav');
-        const btn = document.querySelector('.mobile-menu-btn');
-
-        if (nav.classList.contains('active')) {
-            // Se o clique NÃO foi dentro do nav e NÃO foi no botão MENU
-            if (!nav.contains(event.target) && !btn.contains(event.target)) {
-                nav.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
-
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 1024) {
-            const nav = document.getElementById('main-nav');
-            nav.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    function toggleMenu(event) {
-        if (event) event.stopPropagation();
-        const nav = document.getElementById('main-nav');
-        nav.classList.toggle('active');
-    }
-
-    // Lógica para os cliques nos Dropdowns (Tablet e Mobile)
-    document.querySelectorAll('.dropdown').forEach(drop => {
-        drop.addEventListener('click', function(e) {
-            if (window.innerWidth <= 1024) {
-                e.stopPropagation();
-                // Fecha outros menus abertos
-                document.querySelectorAll('.dropdown-content').forEach(content => {
-                    if (content !== this.querySelector('.dropdown-content')) {
-                        content.classList.remove('show');
-                    }
-                });
-                // Abre o atual
-                this.querySelector('.dropdown-content').classList.toggle('show');
-            }
-        });
-    });
-
-    // Fechar tudo ao clicar fora
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown-content').forEach(c => c.classList.remove('show'));
-        document.getElementById('main-nav').classList.remove('active');
-    });
-</script>
+<nav class="breadcrumb-container">
+    <div class="breadcrumb-content" id="breadcrumb-lista">
+        </div>
+</nav>
 
 <section class="hero-section">
     <div class="container hero-layout">
@@ -181,7 +43,6 @@
     </div>
 </section>
 
-
 <section class="container leadership-section">
     <h3 class="section-title">Chefias de Estado e Governo</h3>
     
@@ -198,7 +59,6 @@
         <div class="leader-card small-card"><small>Presidente da Alta Corte</small><strong>Amélia Diniz</strong></div>
     </div>
 </section>
-
 
 <main class="container">
     <h3 class="section-title">Principais Informações</h3>
@@ -222,29 +82,11 @@
             <p>Histórico completo de todos os chefes de estado e governo da Federação.</p>
             <a href="governantes.html" class="btn">Ver Histórico</a>
         </div>
-        <div class="card-destaque border-dourado">
-            <div class="tag dourado">IDENTIDADE</div>
-            <h3>Partidos Políticos</h3>
-            <p>Conheça todos os partidos políticos da Federação.</p>
-            <a href="partidos.html" class="btn">Ver Partidos</a>
-        </div>
         <div class="card-destaque border-azul">
             <div class="tag azul">TERRITÓRIO</div>
             <h3>Organização Territorial</h3>
             <p>Lista completa dos Estados, Distritos Estaduais, Regiões e Propostas de Criação de Estados.</p>
-            <a href="territorio.html" class="btn">Acessar</a>
-        </div>
-        <div class="card-destaque border-azul">
-            <div class="tag azul">TERRITÓRIO</div>
-            <h3>Mundo</h3>
-            <p>Conheça os principais acintecimentos mundiais.</p>
-            <a href="mundo.html" class="btn">Acessar</a>
-        </div>
-        <div class="card-destaque border-roxo">
-            <div class="tag roxo">LEGISLAÇÃO</div>
-            <h3>Constituição</h3>
-            <p>Consulte a Constituion de 2025 e o arquivo histórico das Constituições Anteriores.</p>
-            <a href="legislacao.html" class="btn">Consultar</a>
+            <a href="organizacao.html" class="btn">Acessar</a>
         </div>
         <div class="card-destaque border-vermelho">
             <div class="tag vermelho">GOVERNO</div>
@@ -264,150 +106,10 @@
             <p>Entenda o funcionamento da Alta Corte de Justiça e a proteção constitucional.</p>
             <a href="judiciario.html" class="btn">Entenda o Funcionamento</a>
         </div>
-        <div class="card-destaque border-verde">
-            <div class="tag verde">OUTROS</div>
-            <h3>INEG</h3>
-            <p>Portal de transparência com censos e indicadores socioeconômicos.</p>
-            <a href="ineg.html" class="btn">Acessar Dados</a>
-        </div>
-        <div class="card-destaque border-verde">
-            <div class="tag verde">OUTROS</div>
-            <h3>Banco Central</h3>
-            <p>Gestão da moeda Aruak, política monetária e estabilidade econômica.</p>
-            <a href="banco-central.html" class="btn">Acessar Portal</a>
-        </div>
-        <div class="card-destaque border-verde">
-            <div class="tag verde">OUTROS</div>
-            <h3>Forças Armadas</h3>
-            <p>Conheça as forças armadas da Federação.</p>
-            <a href="forcas_armadas.html" class="btn">Acessar Portal</a>
-        </div>
     </div> 
-    <br>
-    <div class="cambio-widget">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-            <span style="color: #64748b; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;">MERCADO DE DIVISAS</span>
-            <span id="txt-variacao" style="color: #00ff41; font-size: 0.85rem; font-weight: 800;">▲ 0.12%</span>
-        </div>
-
-        <div class="valor-principal">
-            US$ 1,00 = <span style="color: #f1c40f;">A$ 1,37</span>
-        </div>
-        <p style="color: #475569; font-size: 0.65rem; margin-top: -5px; margin-bottom: 20px;">Câmbio Oficial Aruak (A$)</p>
-
-        <div class="periodo-tabs">
-            <button class="tab-btn active" onclick="atualizarGrafico('hoje', this)">HOJE</button>
-            <button class="tab-btn" onclick="atualizarGrafico('semana', this)">SEMANA</button>
-            <button class="tab-btn" onclick="atualizarGrafico('mes', this)">MÊS</button>
-            <button class="tab-btn" onclick="atualizarGrafico('ano', this)">ANO</button>
-        </div>
-
-        <div class="view-container">
-            <div id="path-grafico" class="linha-grafico"></div>
-            <div id="overlay-mouse" style="position: absolute; inset: 0; display: flex;"></div>
-        </div>
-
-        <div id="legendas" class="legendas-tempo"></div>
-    </div>
-
-    <script>
-    const dadosCambio = {
-        hoje: {
-            path: "polygon(0% 100%, 0% 75%, 15% 60%, 25% 50%, 40% 85%, 55% 55%, 65% 35%, 75% 0%, 85% 15%, 92% 20%, 100% 25%, 100% 100%)",
-            variacao: "▲ 1.48%",
-            legendas: ["08:00", "11:00", "14:00", "17:00", "20:00"],
-            preços: ["A$ 1.35", "A$ 1.36", "A$ 1.34", "A$ 1.38", "A$ 1.37"]
-        },
-        semana: {
-            path: "polygon(0% 100%, 0% 100%, 10% 85%, 25% 66%, 40% 80%, 55% 50%, 65% 70%, 75% 33%, 85% 45%, 92% 15%, 100% 0%, 100% 100%)",
-            variacao: "▲ 4.58%",
-            legendas: ["Domingo", "Terça", "Quarta", "Quinta", "Sábado"],
-            preços: ["A$ 1.31", "A$ 1.33", "A$ 1.32", "A$ 1.35", "A$ 1.37"]
-        },
-        mes: {
-            path: "polygon(0% 100%, 0% 36%, 10% 55%, 25% 80%, 35% 50%, 50% 20%, 65% 35%, 75% 28%, 85% 40%, 92% 15%, 100% 0%, 100% 100%)",
-            variacao: "▲ 7.03%",
-            legendas: ["Semana 1", "Semana 2", "Semana 3", "Semana 4", "Semana 5"],
-            preços: ["A$ 1.28", "A$ 1.17", "A$ 1.32", "A$ 1.30", "A$ 1.37"]
-        },
-        ano: {
-            path: "polygon(0% 100%, 0% 100%, 12% 85%, 25% 92%, 35% 76%, 45% 82%, 55% 48%, 68% 55%, 80% 24%, 88% 35%, 100% 0%, 100% 100%)",
-            variacao: "▲ 22.3%",
-            legendas: ["Jan-Mar", "Abr-Maio", "Jun-Jul", "Ago-Set", "Out-Dez"],
-            preços: ["A$ 1.12", "A$ 1.18", "A$ 1.25", "A$ 1.31", "A$ 1.37"]
-        }
-    };
-
-    function atualizarGrafico(periodo, btn) {
-        const info = dadosCambio[periodo];
-        const grafico = document.getElementById('path-grafico');
-        const overlay = document.getElementById('overlay-mouse');
-        const legendasDiv = document.getElementById('legendas');
-        const varTxt = document.getElementById('txt-variacao');
-
-        // Botões
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        grafico.style.clipPath = info.path;
-        varTxt.innerText = info.variacao;
-
-        overlay.innerHTML = '';
-        info.preços.forEach(p => {
-            const div = document.createElement('div');
-            div.className = 'segmento-hover';
-            div.setAttribute('data-preço', p);
-            overlay.appendChild(div);
-        });
-
-        legendasDiv.innerHTML = '';
-        info.legendas.forEach(l => {
-            const span = document.createElement('span');
-            span.innerText = l;
-            legendasDiv.appendChild(span);
-        });
-    }
-
-    // Início
-    atualizarGrafico('hoje', document.querySelector('.tab-btn'));
-    </script>
 </main>
 
-<footer class="gov-footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="container footer-grid">
-                <div class="footer-info">
-                    <img src="img/brasao.png" alt="Brasão Branco" style="filter: brightness(0) invert(1); width: 80px;">
-                    <h4>Governo da Federação das Guianas</h4>
-                    <p>Portal Oficial</p>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h4>Contatos</h4>
-                <p>State House, Porto Courantyne</p>
-                <p>Distrito Federal de Courantyne</p>
-                <div class="social-links">
-                    <span>Gov.fg</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright-area">
-                <span>©</span>
-                <p>2025 Governo da Federação das Guianas. Todos os direitos reservados.</p>
-            </div>
-            <div class="footer-column">
-                <a href="#">Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Acessibilidade</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
+<div id="footer-placeholder"></div>
 
 </body>
 </html>

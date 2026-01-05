@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria de Governantes — Federação das Guianas</title>
+    <title>Lista de Governantes — Federação das Guianas</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
     <style>
         :root {
             --azul-gov: #0a2e52;
@@ -119,155 +120,17 @@
 </head>
 <body>
 
-<header>
-    <div class="header-flex">
-        <a href="index.html" class="brand-link">
-            <div class="brand">
-                <img src="img/brasao.png" alt="Brasão da Federação">
-                <div class="brand-text">
-                    <h1>FEDERAÇÃO DAS GUIANAS</h1>
-                    <p class="lema-topo">UNIDADES NA UNIÃO</p>
-                </div>
-            </div>
-        </a>
+<div id="header-placeholder"></div>
 
-        <button class="mobile-menu-btn" onclick="toggleMenu(event)">
-            <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <span class="menu-label">MENU</span>
-        </button>
-        
-        <nav class="nav-menu" id="main-nav">
-            <button class="close-menu" onclick="toggleMenu(event)">&times;</button>
-            
-            <a href="index.html" class="nav-item">INÍCIO</a>
-
-            <div class="dropdown">
-                <span class="nav-item">IDENTIDADE</span>
-                <div class="dropdown-content">
-                    <a href="historia.html">História da Federação</a>
-                    <a href="simbolos.html">Símbolos Nacionais</a>
-                    <a href="governantes.html">Lista de Governantes</a>
-                    <a href="partidos.html">Partidos Políticos</a>
-                    <a href="cultura.html">Cultura</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">TERRITÓRIO</span>
-                <div class="dropdown-content">
-                    <a href="territorio.html">Organização Territorial</a>
-                    <a href="mundo.html">Mundo</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">LEGISLAÇÃO</span>
-                <div class="dropdown-content">
-                    <a href="legislacao.html">Constituição</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">GOVERNO</span>
-                <div class="dropdown-content">
-                    <a href="executivo.html">Executivo</a>
-                    <a href="legislativo.html">Legislativo</a>
-                    <a href="judiciario.html">Judiciário</a>
-                    <a href="ministerios.html">Central de Ministérios</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <span class="nav-item">OUTROS</span>
-                <div class="dropdown-content">
-                    <a href="ineg.html">INEG</a>
-                    <a href="banco-central.html">Banco Central</a>
-                    <a href="forcas_armadas.html">Forças Armadas</a>
-                    <a href="educacao.html">Educação</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
-
-<script>
-    function toggleMenu(event) {
-        // Impede que o clique no botão se espalhe e feche o menu imediatamente
-        if (event) {
-            event.stopPropagation();
-        }
-
-        const nav = document.getElementById('main-nav');
-        const isOpen = nav.classList.contains('active');
-
-        if (!isOpen) {
-            nav.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Trava o scroll do site
-        } else {
-            nav.classList.remove('active');
-            document.body.style.overflow = 'auto';   // Libera o scroll do site
-        }
-    }
-
-    document.addEventListener('click', function(event) {
-        const nav = document.getElementById('main-nav');
-        const btn = document.querySelector('.mobile-menu-btn');
-
-        if (nav.classList.contains('active')) {
-            // Se o clique NÃO foi dentro do nav e NÃO foi no botão MENU
-            if (!nav.contains(event.target) && !btn.contains(event.target)) {
-                nav.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
-
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 1024) {
-            const nav = document.getElementById('main-nav');
-            nav.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    function toggleMenu(event) {
-        if (event) event.stopPropagation();
-        const nav = document.getElementById('main-nav');
-        nav.classList.toggle('active');
-    }
-
-    // Lógica para os cliques nos Dropdowns (Tablet e Mobile)
-    document.querySelectorAll('.dropdown').forEach(drop => {
-        drop.addEventListener('click', function(e) {
-            if (window.innerWidth <= 1024) {
-                e.stopPropagation();
-                // Fecha outros menus abertos
-                document.querySelectorAll('.dropdown-content').forEach(content => {
-                    if (content !== this.querySelector('.dropdown-content')) {
-                        content.classList.remove('show');
-                    }
-                });
-                // Abre o atual
-                this.querySelector('.dropdown-content').classList.toggle('show');
-            }
-        });
-    });
-
-    // Fechar tudo ao clicar fora
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown-content').forEach(c => c.classList.remove('show'));
-        document.getElementById('main-nav').classList.remove('active');
-    });
-</script>
+<nav class="breadcrumb-container">
+    <div class="breadcrumb-content" id="breadcrumb-lista">
+        </div>
+</nav>
 
 <main class="container">
     <section style="padding: 40px 0;">
         <div class="tag dourado">IDENTIDADE</div>
-        <h2 class="titulo-destaque">Galeria de Chefes de Estado e Governo</h2>
+        <h2 class="titulo-destaque">Lista de Chefes de Estado e Governo</h2>
     </section>
 
     <div class="era-divider"><h2>Período de Transição (1930–1932)</h2></div>
@@ -498,40 +361,7 @@
     </div>
 </main>
 
-<footer class="gov-footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="container footer-grid">
-                <div class="footer-info">
-                    <img src="img/brasao.png" alt="Brasão Branco" style="filter: brightness(0) invert(1); width: 80px;">
-                    <h4>Governo da Federação das Guianas</h4>
-                    <p>Portal Oficial</p>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h4>Contatos</h4>
-                <p>State House, Porto Courantyne</p>
-                <p>Distrito Federal de Courantyne</p>
-                <div class="social-links">
-                    <span>Gov.fg</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright-area">
-                <span>©</span>
-                <p>2025 Governo da Federação das Guianas. Todos os direitos reservados.</p>
-            </div>
-            <div class="footer-column">
-                <a href="#">Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Acessibilidade</a>
-            </div>
-        </div>
-    </div>
-</footer>
+<div id="footer-placeholder"></div>
 
 </body>
 </html>
