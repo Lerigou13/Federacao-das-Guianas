@@ -9,30 +9,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!isOpen) {
             navMenu.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Trava o scroll
+            document.body.style.overflow = 'hidden'; 
         } else {
             fecharTudo();
         }
     };
 
-    // 2. LÓGICA DOS DROPDOWNS (Clique em Identidade, Território, etc.)
     const dropdowns = document.querySelectorAll('.dropdown');
-    
     dropdowns.forEach(drop => {
         drop.addEventListener('click', function(e) {
-            // Só executa o clique se a tela for menor que 1024px (Tablet/Mobile)
             if (window.innerWidth <= 1024) {
-                e.stopPropagation(); // Impede fechar o menu ao clicar no item
+                e.stopPropagation();
                 
                 const content = this.querySelector('.dropdown-content');
                 const isOpened = content.classList.contains('show');
 
-                // Fecha outros submenus abertos para não virar bagunça
                 document.querySelectorAll('.dropdown-content').forEach(c => {
                     c.classList.remove('show');
                 });
 
-                // Se não estava aberto, abre agora
                 if (!isOpened) {
                     content.classList.add('show');
                 }
@@ -40,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 3. FECHAR AO CLICAR FORA
     document.addEventListener('click', function(event) {
-        // Se clicar fora do menu e o menu estiver aberto, fecha tudo
         if (navMenu.classList.contains('active')) {
             if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
                 fecharTudo();
@@ -50,17 +43,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // 4. FUNÇÃO AUXILIAR PARA LIMPAR TUDO
     function fecharTudo() {
         navMenu.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Libera o scroll
-        // Fecha todos os submenus abertos
+        document.body.style.overflow = 'auto'; 
         document.querySelectorAll('.dropdown-content').forEach(c => {
             c.classList.remove('show');
         });
     }
 
-    // 5. SE REDIMENSIONAR A TELA (Evita bugs)
     window.addEventListener('resize', function() {
         if (window.innerWidth > 1024) {
             fecharTudo();
@@ -130,38 +120,38 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarGrafico('hoje', null);
 });
 
+const categorias = {
+    'identidade': [
+        'historia.html', 
+        'simbolos.html', 
+        'cultura.html', 
+        'partidos.html', 
+        'governantes.html'
+    ],
+    'territorio': [
+        'organizacao.html', 
+        'mundo.html'
+    ],
+    'governo': [
+        'ministerios.html', 
+        'executivo.html',
+        'legislativo.html',
+        'judiciario.html'
+    ],
+    'legislacao': [
+        'constituicao.html'
+    ],
+    'outros': [
+        'ineg.html',
+        'banco-central.html',
+        'forcas_armadas.html',
+        'educacao.html'
+    ]
+};
 
 document.addEventListener("DOMContentLoaded", function() {
     const breadcrumbElement = document.getElementById('breadcrumb-lista');
     if (!breadcrumbElement) return;
-    const categorias = {
-        'identidade': [
-            'historia.html', 
-            'simbolos.html', 
-            'cultura.html', 
-            'partidos.html', 
-            'governantes.html'
-        ],
-        'territorio': [
-            'organizacao.html', 
-            'mundo.html'
-        ],
-        'governo': [
-            'ministerios.html', 
-            'executivo.html',
-            'legislativo.html',
-            'judiciario.html'
-        ],
-        'legislacao': [
-            'constituicao.html'
-        ],
-        'outros': [
-            'ineg.html',
-            'banco-central.html',
-            'forcas_armadas.html',
-            'educacao.html'
-        ]
-    };
 
     const urlAtual = window.location.pathname.split("/").pop();
     
@@ -202,17 +192,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- 1. CARREGAR CABEÇALHO ---
     const headerPlaceholder = document.getElementById('header-placeholder');
     if (headerPlaceholder) {
-        fetch('cabecalho.html')
+        fetch("cabecalho.html")
             .then(response => response.text())
             .then(data => {
-                headerPlaceholder.innerHTML = data;
-                
-                // IMPORTANTE: Reativar as funções de clique após o HTML ser injetado
-                ativarLogicaMenu(); 
+                document.getElementById("header-placeholder").innerHTML = data;
+                if (typeof ativarLogicaMenu === "function") ativarLogicaMenu();
+                destacarLinkAtivo(); 
             });
     }
 
-    // --- 2. CARREGAR RODAPÉ E ANO ---
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         fetch('rodape.html')
@@ -226,12 +214,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    // --- 3. FUNÇÃO QUE FAZ O MENU FUNCIONAR ---
     function ativarLogicaMenu() {
         const navMenu = document.getElementById('main-nav');
         const menuBtn = document.querySelector('.mobile-menu-btn');
-
-        // Torna a função global para o onclick="toggleMenu(event)" do HTML funcionar
         window.toggleMenu = function(event) {
             if (event) event.stopPropagation();
             const isOpen = navMenu.classList.contains('active');
@@ -267,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.dropdown-content').forEach(c => c.classList.remove('show'));
         }
 
-        // Fechar ao clicar fora
         document.addEventListener('click', function(event) {
             if (navMenu && navMenu.classList.contains('active')) {
                 if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
@@ -285,11 +269,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
         setTimeout(() => {
             if (breadContainer) {
-                // Pegamos a altura atual para a transição funcionar
                 const alturaAtual = breadContainer.offsetHeight;
                 breadContainer.style.height = alturaAtual + 'px';
-                
-                // Forçamos o navegador a processar a altura antes de zerar
                 setTimeout(() => {
                     breadContainer.style.opacity = "0";
                     breadContainer.style.height = "0";
@@ -298,29 +279,60 @@ document.addEventListener("DOMContentLoaded", function() {
                     breadContainer.style.borderBottomWidth = "0";
                 }, 50);
 
-                // Só depois de terminar a animação (1s) é que tiramos do mapa
                 setTimeout(() => {
                     breadContainer.style.display = "none";
                 }, 1050);
             }
-        }, 2000); // Espera 2 segundos antes de começar a sumir
+        }, 2000);
     }
-
 });
+
+function destacarLinkAtivo() {
+    // 1. Pega o final da URL
+    let path = window.location.pathname.split("/").pop();
+    
+    // 2. Se a URL for vazia, ou terminar em "/", ou for index.html, assume que é HOME
+    const ehHome = (path === "" || path === "index.html" || path === "index.php");
+
+    const links = document.querySelectorAll('.nav-link');
+
+    links.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+
+        // REGRA PARA O INÍCIO (HOME)
+        if (ehHome && (href === "index.html" || href === "./" || href === "index")) {
+            link.classList.add('active');
+        } 
+        // REGRA PARA PÁGINAS NORMAIS
+        else if (path !== "" && href === path) {
+            link.classList.add('active');
+        }
+
+        // REGRA PARA SUBPÁGINAS
+        if (typeof categorias !== 'undefined') {
+            for (let pai in categorias) {
+                if (categorias[pai].includes(path)) {
+                    // Se o link atual do menu for o "pai" da subpágina
+                    if (href.includes(pai)) {
+                        link.classList.add('active');
+                    }
+                }
+            }
+        }
+    });
+}
 
 function toggleTabela() {
     const rows = document.querySelectorAll('.row-hidden');
     const texto = document.getElementById('btnTexto');
     const seta = document.getElementById('btnSeta');
-    
-    // Verifica se a primeira linha está escondida
     const estaEscondido = (rows[0].style.display === 'none' || rows[0].style.display === '');
 
     rows.forEach(r => {
         r.style.display = estaEscondido ? 'table-row' : 'none';
     });
 
-    // Troca o texto e a direção da seta
     if (estaEscondido) {
         texto.innerText = 'Ver Principais';
         seta.classList.remove('seta-baixo');
@@ -333,15 +345,10 @@ function toggleTabela() {
 }
 
 function abrirConst(evt, idAlvo) {
-    // Esconde todos os conteúdos
     const conteudos = document.querySelectorAll('.const-content');
     conteudos.forEach(c => c.classList.remove('active'));
-
-    // Remove classe ativa de todos os botões
     const botoes = document.querySelectorAll('.btn-lei');
     botoes.forEach(b => b.classList.remove('active'));
-
-    // Mostra o selecionado e ativa o botão
     document.getElementById(idAlvo).classList.add('active');
     evt.currentTarget.classList.add('active');
 }

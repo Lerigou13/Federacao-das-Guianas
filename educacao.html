@@ -8,39 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
     <style>
-        :root {
-            --azul-gov: #0a2e52;
-            --ouro-gov: #d4af37;
-            --cinza-claro: rgb(255, 255, 255);
-        }
-
-        .educacao-hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            background: var(--azul-gov);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--ouro-gov);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-top: 50px;
-        }
-
-        .educacao-texto-topo { padding: 60px; color: white; }
-
-        .tag-educacao {
-            background: var(--verde);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
         .secao-topico {
             margin: 60px 0;
             padding-bottom: 20px;
@@ -48,7 +15,7 @@
 
         .secao-topico h2 {
             font-size: 2rem;
-            color: var(--azul-gov);
+            color: var(--azul);
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 20px;
@@ -58,18 +25,18 @@
         }
 
         .subsecao-card {
-            background: var(--cinza-claro);
+            background: var(--branco);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
-            border-left: 8px solid var(--azul-gov); 
+            border-left: 8px solid var(--azul); 
             display: flex;
             gap: 25px;
             align-items: flex-start;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .subsecao-card.uf { border-left-color: var(--ouro-gov); }
+        .subsecao-card.uf { border-left-color: var(--ouro); }
         .subsecao-card.ue { border-left-color: var(--vermelho); }
         .subsecao-card.ud { border-left-color: var(--verde); }
 
@@ -83,7 +50,7 @@
 
         .subsecao-card h3 {
             font-size: 1.5rem;
-            color: var(--azul-gov);
+            color: var(--azul);
             font-weight: 800;
             margin-bottom: 5px;
             line-height: 1.2;
@@ -106,8 +73,6 @@
         }
 
         @media (max-width: 900px) {
-            .educacao-hero-grid { grid-template-columns: 1fr; }
-            .educacao-texto-topo { padding: 40px; }
             .secao-topico h2 { font-size: 1.5rem; }
             .subsecao-card { flex-direction: column; text-align: center; }
             .subsecao-card img.logo-universiti { margin: 0 auto 20px auto; }
@@ -130,9 +95,9 @@
         <h2 class="titulo-destaque">Sistema Educacional</h2>
         <p style="color: #666;">Entenda as etapas da educação nacional.</p>
     </section>
-    <section class="educacao-hero-grid">
-        <div class="educacao-texto-topo">
-            <span class="tag-educacao">Formando o Futuro</span>
+    <section class="hero-grid">
+        <div class="texto-topo">
+            <span class="tag-grande">Formando o Futuro</span>
             <h2 style="font-size: 2.5rem; color: white; margin: 10px 0;">Educação Nacional</h2>
             <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
                 O sistema educacional da Federação das Guianas é a base para o desenvolvimento de nossos cidadãos, desde os primeiros passos na infância até as mais altas especializações universitárias.

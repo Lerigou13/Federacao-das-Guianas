@@ -9,49 +9,13 @@
     <script src="js/script.js"></script>
     <style>
         :root {
-            --ouro: #d4af37;
-            --azul-gov: #0a2e52;
             --voto-sim: #2b8a3e;    
             --voto-nao: #bc2a3a;    
             --voto-neutro: #6c757d; 
             --voto-extra: #1971c2;  
-            --cor-bg-tooltip: rgba(17, 24, 39, 0.95);
         }
 
-        .titulo-destaque {
-            display: flex;
-            align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            font-weight: 800;
-            color: #1a202c;
-            padding-left: 15px;
-            border-left: 6px solid #d4af37;
-            margin: 20px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ineg-hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            background: var(--azul-gov);
-            border-radius: 20px;
-            overflow: hidden;
-            margin-top: 50px;
-            min-height: 450px;
-            align-items: stretch;
-        }
-
-        .ineg-texto-topo { 
-            padding: 60px; 
-            color: white; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-        }
-
-        .ineg-imagem-topo {
+        .imagem-topo {
             background: white;
             display: flex;
             align-items: center;
@@ -59,32 +23,16 @@
             padding: 20px;
         }
 
-        .ineg-imagem-topo img {
+        .imagem-topo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
         }
 
-        .tag-ineg {
-            background: var(--verde);
-            color: var(--branco);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block; 
-            align-self: flex-start;
-            width: fit-content;
-        }
-
-
         .tabela-wrapper { border: 1px solid #e9ecef; border-radius: 8px; overflow: hidden; margin-bottom: 50px; }
-        .ineg-table { width: 100%; border-collapse: collapse; }
-        .ineg-table td { padding: 25px; border-bottom: 1px solid #f1f3f5; vertical-align: top; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table td { padding: 25px; border-bottom: 1px solid #f1f3f5; vertical-align: top; }
         .ano-col { width: 80px; font-weight: 900; color: #ced4da; font-size: 1.2rem; }
         .row-main .ano-col { color: var(--ouro); }
         .row-hidden { display: none; }
@@ -167,7 +115,7 @@
             padding: 18px;
             background: none;
             border: none;
-            color: var(--azul-gov);
+            color: var(--azul);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
             font-weight: 800;
@@ -239,12 +187,7 @@
         }
 
         @media (max-width: 900px) {
-            .ineg-hero-grid { 
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-            .ineg-texto-topo { order: 1; padding: 40px; }
-            .ineg-imagem-topo { 
+            .imagem-topo { 
                 order: 2; 
                 height: 350px;
             }
@@ -258,7 +201,7 @@
         .map-card h4 { 
             font-size: 0.75rem; 
             text-transform: uppercase; 
-            color: var(--azul-gov); 
+            color: var(--azul); 
             margin-bottom: 10px; 
             font-weight: 800;
         }
@@ -276,26 +219,27 @@
 <main class="container">
     <section style="padding: 40px 0 20px 0;">
         <div class="tag verde">OUTROS</div>
-        <h2>Instituto Nacional Estatístico, Ecológico e Geográfico Guianense</h2>
+        <h2 class="titulo-destaque">Instituto Nacional Estatístico, Ecológico e Geográfico Guianense</h2>
         <p style="color: #666;">Veja informações do INEG.</p>
     </section>
-    <section class="ineg-hero-grid">
-        <div class="ineg-texto-topo">
-            <span class="tag-ineg">Instituto Nacional</span>
+    <section class="hero-grid">
+        <div class="texto-topo">
+            <span class="tag-grande">Instituto Nacional</span>
             <h2 style="font-size: 2.5rem; color: white; margin: 10px 0;">Missão Institucional</h2>
             <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
                 O INEG é o pilar da inteligência geográfica e estatística da Federação, 
                 unindo dados ecológicos e demográficos para o planejamento soberano do território.
             </p>
         </div>
-        <div class="ineg-imagem-topo">
+        <div class="imagem-topo">
             <img src="img/ineg.png" alt="INEG">
         </div>
     </section>
+    <br><br>
     <h2 class="titulo-destaque">Plebiscitos e Referendos Históricos</h2>
 
 <div class="tabela-wrapper">
-    <table class="ineg-table">
+    <table class="table">
         <tbody id="listaPlebiscitos">
             <tr class="row-hidden">
                 <td class="ano-col">1915</td>

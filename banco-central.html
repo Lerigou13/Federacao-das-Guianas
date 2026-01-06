@@ -8,68 +8,25 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
     <style>
-        :root {
-            --azul-gov: #0a2e52;
-            --ouro-gov: #d4af37;
-            --verde-gov: #178921;
-            --cinza-claro: #f4f7f9;
-            --grafite: #2d3436;
-        }
-
-        .banco-hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            background: var(--azul-gov);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--ouro-gov);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-top: 50px;
-        }
-
-        .banco-texto-topo { padding: 60px; color: white; }
-        
-        .banco-imagem-topo {
-            background: linear-gradient(45deg, #0a2e52, #1a4a7a);
-            background-image: url('img/banco-central.png'); 
-            background-size: cover;
-            background-position: center;
-        }
-
-        .tag-banco {
-            background: var(--ouro-gov);
-            color: var(--azul-gov);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
         .secao-topico {
             margin: 60px 0;
         }
 
         .secao-topico h2 {
             font-size: 2rem;
-            color: var(--azul-gov);
+            color: var(--azul);
             font-weight: 800;
             text-transform: uppercase;
             margin-bottom: 30px;
-            border-bottom: 3px solid var(--ouro-gov);
+            border-bottom: 3px solid var(--ouro);
             padding-bottom: 10px;
         }
 
         .card-institucional {
-            background: var(--cinza-claro);
             border-radius: 12px;
             padding: 40px;
             margin-bottom: 30px;
-            border-left: 8px solid var(--azul-gov);
+            border-left: 8px solid var(--azul);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
@@ -92,12 +49,12 @@
         }
 
         .card-funcao:hover {
-            border-color: var(--ouro-gov);
+            border-color: var(--ouro);
             transform: translateY(-5px);
         }
 
         .card-funcao h3 {
-            color: var(--azul-gov);
+            color: var(--azul);
             font-size: 1.2rem;
             font-weight: 800;
             margin-bottom: 15px;
@@ -124,16 +81,8 @@
 
         .info-moeda h3 {
             font-size: 1.8rem;
-            color: var(--azul-gov);
+            color: var(--azul);
             margin-bottom: 10px;
-        }
-
-        .valor-cambio {
-            font-size: 1.1rem;
-            color: var(--verde-gov);
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: block;
         }
 
         .img-full-width {
@@ -164,24 +113,6 @@
             margin-bottom: 8px;
             font-size: 1rem;
         }
-
-        @media (max-width: 900px) {
-            .banco-hero-grid { grid-template-columns: 1fr; }
-            .painel-moeda { flex-direction: column; text-align: center; }
-            .banco-imagem-topo { height: 300px; order: 2; }
-        }
-
-        @media (max-width: 1100px) {
-            .grid-funcoes {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
-
-        @media (max-width: 650px) {
-            .grid-funcoes {
-                grid-template-columns: 1fr !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -199,28 +130,28 @@
         <h2 class="titulo-destaque">Banco Central das Guianas</h2>
         <p style="color: #666;">Garantindo a estabilidade do poder de compra da moeda e a solidez do sistema financeiro nacional para o progresso de todos os guianenses.</p>
     </section>
-    <section class="banco-hero-grid">
-        <div class="banco-texto-topo">
-            <span class="tag-banco">Central Monetária</span>
+    <section class="hero-grid">
+        <div class="texto-topo">
+            <span class="tag-grande">Central Monetária</span>
             <h2 style="font-size: 2.5rem; color: white; margin: 10px 0;">Missão Institucional</h2>
             <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
                 O Banco Central das Guianas (BCG) é uma autarquia de natureza especial, dotada de autonomia operacional para executar as políticas monetárias e cambiais definidas pelo Conselho Monetário Nacional. Atuamos como o guardião da economia, monitorando a inflação e assegurando que o sistema bancário opere com transparência e segurança.
             </p>
         </div>
-        <div class="banco-imagem-topo"></div>
+        <div style="background-image: url('img/banco-central.png');" class="imagem-topo"></div>
     </section>
 
         <section class="secao-topico">
         <h2>A Moeda Nacional</h2>
         
-        <div class="card-institucional" style="border-left-color: var(--ouro-gov); background: white;">
+        <div class="card-institucional" style="border-left-color: var(--ouro); background: white;">
             <p>O <strong>Aruak</strong> é a unidade monetária oficial da Federação das Guianas. Símbolo de nossa soberania e integração econômica, a moeda homenageia em sua face principal <strong>Guilerma</strong>, a figura central da pátria, enquanto seus versos celebram a geografia e a arquitetura das nossas dez províncias e distritos.</p>
         </div>
 
         <div class="grid-funcoes" style="grid-template-columns: 1fr 1fr; gap: 30px;">
             
             <div class="card-funcao" style="min-height: auto;">
-                <h3 style="border-bottom: 2px solid var(--ouro-gov); padding-bottom: 10px;">Moedas</h3>
+                <h3 style="border-bottom: 2px solid var(--ouro); padding-bottom: 10px;">Moedas</h3>
                 <div class="container-img-moeda">
                     <img src="img/todas-moedas.png" alt="Conjunto de Moedas Aruak" class="img-full-width">
                 </div>
@@ -236,7 +167,7 @@
             </div>
 
             <div class="card-funcao" style="min-height: auto;">
-                <h3 style="border-bottom: 2px solid var(--verde-gov); padding-bottom: 10px;">Notas</h3>
+                <h3 style="border-bottom: 2px solid var(--verde); padding-bottom: 10px;">Notas</h3>
                 <div class="container-img-nota">
                     <img src="img/todas-notas.png" alt="Conjunto de Notas Aruak" class="img-full-width">
                 </div>
@@ -255,7 +186,7 @@
         </div>
 
         <div style="margin-top: 40px;">
-            <h3 style="color: var(--azul-gov); font-weight: 800; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 20px;">Edições Especiais de 1 Aruak</h3>
+            <h3 style="color: var(--azul); font-weight: 800; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 20px;">Edições Especiais de 1 Aruak</h3>
             <div class="grid-funcoes">
                 <div class="card-funcao card-especial-item" style="border-top: 4px solid #3498db;">
                     <img src="img/moeda-2021.png" alt="Edição 2021">

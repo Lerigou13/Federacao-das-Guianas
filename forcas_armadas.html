@@ -8,37 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
     <style>
-        :root {
-            --azul-gov: #0a2e52;
-            --ouro-gov: #d4af37;
-            --verde-gov: #178921;
-            --vermelho-gov: #8b0000;
-            --cinza-claro: #f4f7f9;
-        }
-
-        .militar-hero {
-            background: var(--azul-gov);
-            border-radius: 20px;
-            padding: 60px;
-            color: white;
-            border: 1px solid var(--ouro-gov);
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .tag-militar {
-            background: var(--verde-gov);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
         .secao-forcas { margin: 60px 0; }
 
         .card-forca {
@@ -56,12 +25,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-right: 8px solid var(--azul-gov);
+            border-right: 8px solid var(--azul);
         }
 
-        .img-armee { border-right-color: var(--verde-gov); }
-        .img-flotte { border-right-color: var(--azul-gov); }
-        .img-aeropuvoir { border-right-color: var(--vermelho-gov); }
+        .img-armee { border-right-color: var(--verde); }
+        .img-flotte { border-right-color: var(--azul); }
+        .img-aeropuvoir { border-right-color: var(--vermelho); }
 
         .conteudo-forca {
             padding: 40px;
@@ -72,7 +41,7 @@
 
         .identificacao-forca h2 {
             font-size: 1.8rem;
-            color: var(--azul-gov);
+            color: var(--azul);
             font-weight: 800;
             margin-bottom: 5px;
         }
@@ -104,11 +73,11 @@
 
         @media (max-width: 750px) {
             .card-forca { grid-template-columns: 1fr; }
-            .foto-forca { height: 250px; border-right: none; border-bottom: 8px solid var(--azul-gov); }
+            .foto-forca { height: 250px; border-right: none; border-bottom: 8px solid var(--azul); }
             .conteudo-forca { padding: 30px; }
-            .img-armee { border-bottom-color: var(--verde-gov); }
-            .img-flotte { border-bottom-color: var(--azul-gov); }
-            .img-aeropuvoir { border-bottom-color: var(--vermelho-gov); }
+            .img-armee { border-bottom-color: var(--verde); }
+            .img-flotte { border-bottom-color: var(--azul); }
+            .img-aeropuvoir { border-bottom-color: var(--vermelho); }
         }
     </style>
 </head>
@@ -127,10 +96,12 @@
         <h2 class="titulo-destaque">Forças Armadas</h2>
         <p style="color: #666;">Conheça a Armee, a Flotte e a AeroPuvoir.</p>
     </section>
-    <section class="militar-hero">
-        <span class="tag-militar">Soberania e Defesa</span>
-        <h1 style="font-size: 2.5rem; margin-bottom: 15px;">Forças Armadas da Federação</h1>
-        <p style="max-width: 800px; opacity: 0.9;">Proteger a terra, as águas e o céu da nossa união.</p>
+    <section class="hero-grid">
+        <div class="texto-topo">
+            <span class="tag-grande">Soberania e Defesa</span>
+            <h1 style="font-size: 2.5rem; margin-bottom: 15px;">Forças Armadas da Federação</h1>
+            <p style="max-width: 800px; opacity: 0.9;">Proteger a terra, as águas e o céu da nossa união.</p>
+        </div>
     </section>
 
     <section class="secao-forcas">
@@ -141,7 +112,7 @@
                 <div class="identificacao-forca">
                     <h2>Armee</h2>
                     <span class="nome-nativo">Puvoirkisu de Terre lo Jungle</span>
-                    <span class="sigla-forca" style="background: var(--verde-gov);">FTF (Forças da Terra e Floresta)</span>
+                    <span class="sigla-forca" style="background: var(--verde);">FTF (Forças da Terra e Floresta)</span>
                 </div>
                 <div class="desc-forca">
                     <p>
@@ -157,7 +128,7 @@
                 <div class="identificacao-forca">
                     <h2>Flotte</h2>
                     <span class="nome-nativo">Puvoirkisu de Mer lo Rive</span>
-                    <span class="sigla-forca" style="background: var(--azul-gov);">FMR (Forças do Mar e Rios)</span>
+                    <span class="sigla-forca" style="background: var(--azul);">FMR (Forças do Mar e Rios)</span>
                 </div>
                 <div class="desc-forca">
                     <p>
@@ -173,7 +144,7 @@
                 <div class="identificacao-forca">
                     <h2>AeroPuvoir</h2>
                     <span class="nome-nativo">Puvoirkisu de Totale Ciel</span>
-                    <span class="sigla-forca" style="background: var(--vermelho-gov);">FTC (Forças de Todo Céu)</span>
+                    <span class="sigla-forca" style="background: var(--vermelho);">FTC (Forças de Todo Céu)</span>
                 </div>
                 <div class="desc-forca">
                     <p>

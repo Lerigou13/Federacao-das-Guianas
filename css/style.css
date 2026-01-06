@@ -52,6 +52,39 @@ header {
         gap: 20px;
     }
 
+    .nav-link {
+        position: relative;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 5px;
+        left: 10%;
+        background-color: var(--ouro);
+        transition: width 0.3s ease;
+        z-index: 10;
+    }
+
+    .nav-link.active {
+        color: var(--ouro) !important;
+    }
+
+    .nav-link.active::after {
+        width: 80% !important;
+        display: block !important;
+    }
+    
+    .nav-link:hover::after {
+        width: 80%;
+    }
+
     .nav-item, .dropdown span {
         text-decoration: none !important;
         color: white !important;
@@ -135,6 +168,39 @@ header {
         flex-direction: column !important;
         padding: 15px 0 0 0 !important; 
         gap: 15px;
+    }
+
+    .nav-link {
+        position: relative;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 5px;
+        left: 10%;
+        background-color: var(--ouro);
+        transition: width 0.3s ease;
+        z-index: 10;
+    }
+
+    .nav-link.active {
+        color: var(--ouro) !important;
+    }
+
+    .nav-link.active::after {
+        width: 80% !important;
+        display: block !important;
+    }
+
+    .nav-link:hover::after {
+        width: 80%;
     }
 
     .nav-menu {
@@ -380,7 +446,6 @@ header {
 }
 
 .hero-main-text { flex: 1; min-width: 300px; text-align: left; }
-.hero-main-text h2 { font-size: 2.5rem; color: var(--azul); }
 
 .data-wrapper { flex: 1.5; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
 .data-grid-six { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
@@ -690,4 +755,95 @@ header {
     .data-footer-bar { flex-direction: column; gap: 5px; text-align: center; }
     .secondary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .small-card { padding: 0.8rem; }
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    background: var(--azul);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--ouro);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    margin-top: 50px;
+}
+
+.texto-topo { padding: 60px; color: white; }
+
+.imagem-topo {
+    background: linear-gradient(45deg, #0a2e52, #1a4a7a);
+    background-size: cover;
+    background-position: center;
+}
+
+.tag-grande {
+    background: var(--ouro);
+    color: var(--branco);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .painel-moeda { flex-direction: column; text-align: center; }
+    .imagem-topo { height: 300px; order: 2; }
+}
+
+@media (max-width: 1100px) {
+    .grid-funcoes {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .grid-funcoes {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.titulo-destaque {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 800;
+    padding-left: 15px;
+    border-left: 6px solid #d4af37;
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.titulo-portal {
+    border-left: 6px solid var(--ouro); 
+    padding-left: 25px;
+    max-width: 800px;
+}
+
+.titulo-portal h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--azul);
+    line-height: 0.9;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    padding-top: 10px;
+}
+
+.titulo-portal p {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 600px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 10px;
+    font-weight: 900;
 }

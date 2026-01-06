@@ -8,13 +8,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
         <style>
-        :root {
-            --azul-gov: #0a2e52;
-            --ouro-gov: #d4af37;
-        }
-
-        .tag-poder { background: var(--ouro-gov); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: inline-block; }
-
         .corte-sede-grid {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -27,7 +20,7 @@
             margin-bottom: 30px;
         }
 
-        .corte-texto { padding: 50px; color: var(--azul-gov); }
+        .corte-texto { padding: 50px; color: var(--azul); }
 
         .corte-imagem {
             background-image: url('img/altacorte.png'); 
@@ -43,12 +36,12 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.06);
             border: 1px solid #e2e8f0;
             margin-bottom: 50px;
-            border-top: 7px solid var(--ouro-gov);
+            border-top: 7px solid var(--ouro);
         }
 
         .header-corte { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .titulo-corte { color: var(--azul-gov); font-size: 2rem; font-weight: 800; margin: 0; }
-        .badge-membros { background: var(--azul-gov); color: white; padding: 8px 15px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
+        .titulo-corte { color: var(--azul); font-size: 2rem; font-weight: 800; margin: 0; }
+        .badge-membros { background: var(--azul); color: white; padding: 8px 15px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
 
         .texto-judiciario { line-height: 1.8; color: #475569; font-size: 1.1rem; }
 
@@ -63,12 +56,12 @@
             background: #f8fafc;
             padding: 25px;
             border-radius: 15px;
-            border-top: 4px solid var(--ouro-gov);
+            border-top: 4px solid var(--ouro);
             transition: 0.3s;
         }
 
         .camara-item:hover { transform: translateY(-5px); background: #f1f5f9; }
-        .camara-item h4 { color: var(--azul-gov); margin-top: 0; margin-bottom: 10px; font-size: 1rem; }
+        .camara-item h4 { color: var(--azul); margin-top: 0; margin-bottom: 10px; font-size: 1rem; }
         .camara-item p { font-size: 0.85rem; color: #64748b; line-height: 1.5; margin: 0; }
 
         .requisitos-secao {
@@ -87,7 +80,7 @@
             border: 1px solid #e2e8f0;
         }
 
-        .bloco-regra h3 { color: var(--ouro-gov); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .bloco-regra h3 { color: var(--ouro); font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .lista-regras { list-style: none; padding: 0; }
         .lista-regras li { 
             padding: 12px 0; 
@@ -101,9 +94,6 @@
         .lista-regras li::before { content: "⚖️"; font-size: 0.8rem; }
 
         @media (max-width: 900px) {
-            .corte-sede-grid { grid-template-columns: 1fr; }
-            .corte-imagem { height: 250px; order: 2; }
-            .corte-texto { order: 1; padding: 30px; }
             .camaras-grid, .requisitos-secao { grid-template-columns: 1fr; }
             .header-corte { flex-direction: column; text-align: center; gap: 20px; }
         }
@@ -125,17 +115,17 @@
         <p style="color: #666;">Entenda o funcionamento da Alta Corte e as suas funções.</p>
     </section>
     
-        <section class="corte-sede-grid">
-        <div class="corte-texto">
-            <span class="tag-poder" style="margin-bottom: 15px;">Justiça Federal</span>
-            <h3 style="font-size: 2rem; margin-bottom: 15px; color: var(--azul-gov);">Palácio da Justiça</h3>
-            <p style="line-height: 1.8; color: #475569;">
+        <section class="hero-grid">
+        <div class="texto-topo">
+            <span class="tag-grande" style="margin-bottom: 15px;">Justiça Federal</span>
+            <h3 style="font-size: 2rem; margin-bottom: 15px; color: var(--branco);">Palácio da Justiça</h3>
+            <p style="line-height: 1.8;">
                 O Palácio da Justiça, sede da <b>Alta Corte Federal</b> em Porto Courantyne, é o símbolo da imparcialidade e do império da lei na Federação. Projetado para refletir a transparência e a solidez das instituições guianenses, o edifício abriga os plenários onde se decidem as questões fundamentais da nação.
             </p>
         </div>
-        <div class="corte-imagem"></div>
+        <div style="background-image: url(img/altacorte.png);" class="imagem-topo"></div>
     </section>
-
+    <br><br>
     <section class="alta-corte-card">
         <div class="header-corte">
             <h3 class="titulo-corte">Alta Corte Federal</h3>
