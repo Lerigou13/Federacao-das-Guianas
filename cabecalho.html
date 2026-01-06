@@ -83,14 +83,19 @@
 
 <div id="acess-aba" class="aba-acessibilidade">
     <div class="aba-conteudo">
-        <button onclick="toggleContraste()" class="aba-item">
+        <button onclick="toggleContraste()" class="aba-btn" title="Alto Contraste">
             <span class="aba-icon">◐</span>
+            <span class="aba-text">CONTRASTE</span>
         </button>
         <div class="aba-divisor"></div>
-        <button onclick="alterarFonte('aumentar')" class="aba-item">A+</button>
-        <button onclick="alterarFonte('diminuir')" class="aba-item">A-</button>
+        <button onclick="alterarFonte('aumentar')" class="aba-btn" title="Aumentar Fonte">
+            <span class="aba-icon">A+</span>
+        </button>
+        <button onclick="alterarFonte('diminuir')" class="aba-btn" title="Diminuir Fonte">
+            <span class="aba-icon">A-</span>
+        </button>
     </div>
-    <button class="aba-gatilho" onclick="toggleAbaAcess()" title="Acessibilidade">
+    <button class="aba-gatilho" onclick="toggleAbaAcess()" title="Menu de Acessibilidade">
         <span class="seta-aba">▼</span>
     </button>
 </div>
