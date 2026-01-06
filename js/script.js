@@ -383,3 +383,27 @@ function abrirMapa(url, titulo) {
 function fecharMapa() {
     document.getElementById('janelaMapa').style.display = 'none';
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const overlay = document.getElementById('cookie-overlay');
+    if (!localStorage.getItem('cookiesFederacao')) { 
+        setTimeout(() => {
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.classList.add('active');
+            }, 100); 
+        }, 5000);
+    }
+});
+
+function fecharCookie() {
+    const overlay = document.getElementById('cookie-overlay');
+    localStorage.setItem('cookiesFederacao', 'true');
+    overlay.classList.remove('active');
+    overlay.classList.add('leaving');
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        overlay.classList.remove('leaving');
+    }, 1500); 
+}
+

@@ -847,3 +847,113 @@ header {
     padding-bottom: 10px;
     font-weight: 900;
 }
+
+.cookie-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: flex-end;
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+    display: none;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.cookie-overlay.active {
+    opacity: 1;
+}
+
+.cookie-panel {
+    width: 100%;
+    background: #ffffff;
+    padding: 40px 5%;
+    border-top: 5px solid var(--ouro);
+    color: #1a202c;
+    transform: translateY(100%);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-overlay.active .cookie-panel {
+    transform: translateY(0);
+}
+
+.cookie-overlay.leaving .cookie-panel {
+    transform: translateY(100%);
+}
+
+.cookie-overlay.leaving {
+    opacity: 0;
+}
+
+.cookie-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.cookie-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--azul);
+    letter-spacing: 1px;
+}
+
+.cookie-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 900px;
+}
+
+.text-small {
+    font-size: 0.85rem !important;
+    color: #718096;
+}
+
+.cookie-footer {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn-cookie {
+    padding: 15px 30px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    border-radius: var(--radius);
+}
+
+.btn-full {
+    background: var(--azul);
+    color: var(--ouro);
+    border: none;
+    flex: 1;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--azul);
+    color: var(--azul);
+}
+
+.btn-full:hover { background: var(--ouro); color: black; }
+
+/* Animação */
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+/* Ajuste Celular */
+@media (max-width: 768px) {
+    .cookie-footer { flex-direction: column; }
+    .cookie-panel { padding: 30px 20px; }
+}
