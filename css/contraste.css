@@ -376,6 +376,49 @@ body.alto-contraste .titulo-portal p {
     color: #cccccc !important;
 }
 
+/* ============================================================
+   MODO ALTO CONTRASTE (CORRIGIDO)
+   ============================================================ */
+
+body.alto-contraste {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+/* CORREÇÃO DA TAG DE DATA (Fundo Preto, Texto Branco) */
+body.alto-contraste .period-header .date-tag {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .period-header h3 {
+    color: #fff !important;
+}
+
+body.alto-contraste .history-text p {
+    color: #ddd !important;
+}
+
+/* Paginação no contraste */
+body.alto-contraste .num {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.alto-contraste .num.active {
+    background: #fff !important;
+    color: #000 !important;
+}
+body.alto-contraste .btn-nav {
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-nav:disabled {
+    background: #484848;
+}
+
 /* --- AVISO DE COOKIES (P&B) --- */
 body.alto-contraste .cookie-overlay {
     background: rgba(0, 0, 0, 0.95) !important; /* Fundo do overlay ainda mais escuro */
@@ -436,52 +479,39 @@ body.alto-contraste .cookie-header svg {
     color: #ffffff !important;
 }
 
-/* --- TIMELINE / HISTÓRIA (P&B) --- */
-body.alto-contraste .timeline-item {
-    background-color: #1a1a1a !important; /* Cinza grafite sólido */
-    border-left: 8px solid #ffffff !important; /* Borda branca lateral */
-    border-top: 1px solid #333 !important;
-    border-right: 1px solid #333 !important;
-    border-bottom: 1px solid #333 !important;
-    box-shadow: none !important;
-}
-
-body.alto-contraste .period-header {
-    border-bottom: 1px solid #444 !important;
-}
-
-body.alto-contraste .period-header h3 {
-    color: #ffffff !important;
-}
-
-/* Etiqueta de Data (Originalmente Azul) */
-body.alto-contraste .period-header .date-tag {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-radius: 4px !important; /* Visual mais sóbrio */
-}
-
-/* Texto Histórico */
-body.alto-contraste .history-text p {
-    color: #ffffff !important;
-}
-
-/* Imagem Histórica */
-body.alto-contraste .history-img {
-    border: 2px solid #ffffff !important;
+body.alto-contraste .carousel-container {
     background-color: #000000 !important;
 }
 
-/* Mini Tags (Tags de contexto histórico) */
-body.alto-contraste .m-tag {
-    background-color: #333333 !important; /* Cinza um pouco mais claro que o fundo */
+/* Removemos a cor Ouro/Azul e usamos Cinza/Branco */
+body.alto-contraste .timeline-item {
+    background-color: #1a1a1a !important; /* Cinza quase preto */
+    border-left: 10px solid #888888 !important; /* Borda lateral cinza */
     color: #ffffff !important;
-    border: 1px solid #555 !important;
 }
 
-/* Ajuste de responsividade da grid se necessário */
-body.alto-contraste .history-grid {
-    gap: 30px;
+/* Textos e Títulos */
+body.alto-contraste .period-header h3,
+body.alto-contraste .history-text p,
+body.alto-contraste .period-header .date-tag {
+    color: #ffffff !important;
+}
+
+body.alto-contraste .period-header {
+    border-bottom: 1px solid #ffffff !important;
+}
+
+/* Botões e Números (Zerar cores) */
+body.alto-contraste .btn-seta,
+body.alto-contraste .num-cap {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+}
+
+body.alto-contraste .num-cap.active {
+    background-color: #ffffff !important;
+    color: #000000 !important;
 }
 
 /* --- SÍMBOLOS OFICIAIS E DOCUMENTOS (P&B CORRIGIDO) --- */

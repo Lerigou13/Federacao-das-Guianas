@@ -427,3 +427,66 @@ function toggleContraste() {
 document.addEventListener("DOMContentLoaded", function() {
     if (localStorage.getItem('altoContraste') === 'ativado') document.body.classList.add('alto-contraste');
 });
+
+const totalCapitulos = 20; 
+let capituloAtual = 1;
+
+const trilho = document.getElementById('trilho');
+const paginacaoContainer = document.getElementById('paginacao');
+
+const btnPrevTop = document.getElementById('prevBtnTop');
+const btnNextTop = document.getElementById('nextBtnTop');
+const btnPrevBottom = document.getElementById('prevBtnBottom');
+const btnNextBottom = document.getElementById('nextBtnBottom');
+
+function atualizar() {
+    // Move o carrossel
+    trilho.style.transform = `translateX(-${(capituloAtual - 1) * 100}%)`;
+
+    // Ativa/Desativa botões
+    const noInicio = (capituloAtual === 1);
+    const noFim = (capituloAtual === totalCapitulos);
+
+    if(btnPrevTop) btnPrevTop.disabled = noInicio;
+    if(btnPrevBottom) btnPrevBottom.disabled = noInicio;
+    if(btnNextTop) btnNextTop.disabled = noFim;
+    if(btnNextBottom) btnNextBottom.disabled = noFim;
+
+    renderizarNumeros();
+}
+
+function renderizarNumeros() {
+    if (!paginacaoContainer) return;
+    paginacaoContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalCapitulos; i++) {
+        // Lógica: mostra 1,2,3... atuais... 18,19,20
+        if (i <= 3 || i >= totalCapitulos - 2 || (i >= capituloAtual - 1 && i <= capituloAtual + 1)) {
+            const btn = document.createElement('div');
+            btn.className = `num ${i === capituloAtual ? 'active' : ''}`;
+            btn.innerText = i;
+            btn.onclick = () => { capituloAtual = i; atualizar(); };
+            paginacaoContainer.appendChild(btn);
+        } else if (
+            (i === 4 && capituloAtual > 5) || 
+            (i === totalCapitulos - 3 && capituloAtual < totalCapitulos - 4)
+        ) {
+            const dots = document.createElement('span');
+            dots.innerText = '...';
+            dots.style.padding = "0 5px";
+            paginacaoContainer.appendChild(dots);
+            i = (i === 4) ? capituloAtual - 2 : totalCapitulos - 3;
+        }
+    }
+}
+
+const proximo = () => { if (capituloAtual < totalCapitulos) { capituloAtual++; atualizar(); } };
+const anterior = () => { if (capituloAtual > 1) { capituloAtual--; atualizar(); } };
+
+if(btnNextTop) btnNextTop.onclick = proximo;
+if(btnNextBottom) btnNextBottom.onclick = proximo;
+if(btnPrevTop) btnPrevTop.onclick = anterior;
+if(btnPrevBottom) btnPrevBottom.onclick = anterior;
+
+// Inicializa
+atualizar();

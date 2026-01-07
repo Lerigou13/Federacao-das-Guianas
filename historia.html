@@ -7,17 +7,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contraste.css">
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
     <style>
-        .timeline { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .carousel-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
         .timeline-item { 
+            flex: 0 0 100%;
             background: white; 
             padding: 30px; 
             border-radius: var(--radius); 
-            margin-bottom: 40px; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-left: 8px solid var(--ouro);
+            box-sizing: border-box;
+            margin-bottom: 0 !important;
         }
+
+        .nav-container-botoes, .nav-container-inferior {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .btn-nav {
+            background: var(--azul);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .btn-nav:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .num {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            background: #f8fafc;
+            font-weight: 700;
+            color: var(--azul);
+            transition: all 0.2s;
+        }
+
+        .num.active {
+            background: var(--azul);
+            color: white;
+            border-color: var(--azul);
+        }
+
+        .dots {
+            color: #94a3b8;
+            font-weight: bold;
+            padding: 0 2px;
+        }
+
         .period-header { 
             display: flex; 
             justify-content: space-between; 
@@ -28,20 +97,109 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .period-header h3 { color: var(--azul); font-size: 1.3rem; }
+
+        .period-header h3 { color: var(--azul); font-size: 1.3rem; margin: 0; }
+
         .period-header .date-tag { 
             background: var(--azul); color: white; padding: 5px 15px; 
             border-radius: 20px; font-size: 0.8rem; font-weight: 700;
         }
-        .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
-        .history-text p { font-size: 0.95rem; line-height: 1.7; color: #4a5568; text-align: justify; margin-bottom: 15px; }
-        .history-img { width: 100%; border-radius: 8px; border: 1px solid #ddd; object-fit: cover; }
-        .mini-tags-box { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-        .m-tag { font-size: 0.65rem; background: #edf2f7; color: var(--azul); padding: 3px 8px; border-radius: 4px; font-weight: 700; }
+
+        /* AJUSTE PARA OS BOTÕES NÃO SAÍREM DA TELA */
+        .nav-container-inferior {
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            flex-wrap: wrap; /* Faz os botões pularem para baixo se não couberem */
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            max-width: 100%;
+        }
+
+        .paginacao-numeros {
+            display: flex;
+            flex-wrap: wrap; /* Essencial para telas pequenas */
+            justify-content: center;
+            gap: 5px;
+            max-width: 100%;
+        }
+
+        /* Container do conteúdo do capítulo */
+        .history-grid {
+            display: block; /* Importante: remove o grid para o texto fluir */
+            width: 100%;
+        }
+
+        /* Caixa da Imagem */
+        .history-img-box {
+            float: right; /* Faz a imagem flutuar à direita */
+            width: 40%; /* Ajuste o tamanho da imagem (40% da largura do card) */
+            margin-left: 20px; /* Espaço entre o texto e a imagem */
+            margin-bottom: 15px; /* Espaço para o texto não encostar embaixo da imagem */
+        }
+
+        /* Imagem */
+        .history-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            display: block;
+        }
+
+        /* Texto do Capítulo */
+        .history-text {
+            display: block; /* Garante que o texto ocupe o espaço */
+        }
+
+        .history-text p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4a5568;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* Limpa a flutuação para o próximo capítulo não subir */
+        .timeline-item::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsividade: No celular a imagem volta para cima do texto */
+        @media (max-width: 850px) {
+            .history-img-box {
+                float: none; /* Remove a flutuação no celular */
+                width: 100%; /* Imagem ocupa a largura toda */
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+
+        /* Diminui um pouco os botões no celular para ajudar a caber */
+        @media (max-width: 480px) {
+            .num {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+            .btn-nav {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
 
         @media (max-width: 850px) {
-            .history-grid { grid-template-columns: 1fr; }
             .period-header { flex-direction: column; align-items: flex-start; }
+            .timeline-item { padding: 20px; }
         }
     </style>
     
@@ -62,238 +220,374 @@
         <p>A trajetória completa das terras guianenses, desde os tempos ancestrais até a consolidação da Nova República.</p>
     </section>
 
-    
-    <div class="timeline">
+    <div class="nav-container-botoes">
+    <button id="prevBtnTop" class="btn-nav">◀ Anterior</button>
+    <button id="nextBtnTop" class="btn-nav">Próximo ▶</button>
+</div>
 
+<div class="carousel-container">
+    <div class="timeline" id="trilho">
+        
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Período Pré-Colonial</h3>
+                <h3>Capítulo I — Pré-Colonial</h3>
                 <span class="date-tag">Antes de 1499</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Antes da chegada dos europeus, as terras eram habitadas por tribos indígenas como Arawak e Caribes. Viviam de forma autossustentável em uma região de rica biodiversidade e rios navegáveis fundamentais.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GERAL</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloi.png" class="history-img">
                 </div>
-                <img src="img/precolonial.png" alt="Pré-Colonial" class="history-img">
+                <div class="history-text">
+                    <p>O Escudo das Guianas, antes da incursão europeia, configurava-se como um complexo mosaico de nações indígenas que dominavam técnicas avançadas de manejo da floresta tropical. As etnias Arawak e Caribe, embora frequentemente em conflito por territórios, estabeleceram redes de comércio fluvial que conectavam o litoral às profundezas do planalto central. Essas sociedades organizavam-se em aldeias autossustentáveis, onde a agricultura de coivara e a pesca em rios como o Courantyne e o Essequibo garantiam a estabilidade demográfica em um ambiente de biodiversidade exuberante.
+<br><br>A cosmologia dessas populações estava intrinsecamente ligada à hidrografia da região; os rios não eram apenas barreiras geográficas, mas as principais artérias de comunicação e transporte. Através de canoas esculpidas em troncos únicos, os povos originários navegavam por sistemas fluviais que, séculos mais tarde, definiriam as fronteiras políticas da Federação. A resistência e a adaptação dessas tribos ao clima equatorial permitiram a preservação de conhecimentos botânicos e medicinais que sobreviveriam ao impacto inicial do contato com o Velho Mundo.
+<br><br>A ausência de estruturas urbanas monumentais, como as encontradas nos Andes, levou os primeiros cronistas europeus a subestimar a complexidade social guianense. No entanto, estudos arqueológicos contemporâneos revelam que a região era um centro de inovação agrícola, com a criação de solos férteis conhecidos como "terra preta". Essa herança pré-colonial permanece como o alicerce da identidade nacional, representando o período de equilíbrio absoluto entre a humanidade e o bioma amazônico.</p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Período Colonial Espanhol</h3>
-                <span class="date-tag">1499 – 1811</span>
+                <h3>Capítulo II — Colonização Espanhola</h3>
+                <span class="date-tag">1499 – 1648</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Início com Ojeda e Vespúcio. A Espanha reivindicou Guiana e Suriname, mas com presença limitada pela resistência indígena. Bolívar e Amazonas foram incluídos em Nova Granada de forma simbólica, com pouca exploração mineral.</p>
-                    <div class="mini-tags-box">
-                        <span class="m-tag">GUIANA</span><span class="m-tag">SURINAME</span><span class="m-tag">BOLÍVAR</span><span class="m-tag">AMAZONAS</span>
-                    </div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloii.png" class="history-img">
                 </div>
-                <img src="img/espanha.png" alt="Colonial Espanhol" class="history-img">
+                <div class="history-text">
+                    <p>O contato europeu iniciou-se em 1499, quando as expedições de Alonso de Ojeda e Américo Vespúcio mapearam o litoral norte da América do Sul. A Coroa Espanhola, sob a égide do Tratado de Tordesilhas, reivindicou a totalidade do território guianense, incorporando-o simbolicamente à província de Nova Andaluzia. Contudo, a colonização efetiva enfrentou obstáculos intransponíveis: a agressividade das marés, a densidade da selva e a persistente lenda do El Dorado, que desviou recursos humanos e financeiros para buscas infrutíferas no interior montanhoso.
+<br><br>A presença espanhola na região foi marcada por uma ocupação periférica e defensiva. O interesse de Madri concentrava-se nas minas de prata do Potosí e nas rotas do México, deixando o litoral guianense vulnerável à pirataria e a incursões de potências rivais. Pequenas missões jesuítas e fortificações militares foram erguidas nas margens do Rio Orinoco, mas a resistência feroz dos Caribes impediu a interiorização da fé católica e da administração colonial, mantendo a maior parte do território como uma zona de fronteira contestada.
+<br><br>O declínio do poderio espanhol na região culminou no século XVII, com o desgaste provocado pela Guerra dos Oitenta Anos. A incapacidade de proteger suas reivindicações territoriais permitiu que comerciantes neerlandeses e britânicos estabelecessem postos de troca de tabaco e corantes naturais. O Tratado de Münster, em 1648, formalizou o que já era uma realidade de fato: a saída definitiva da Espanha do controle direto sobre o que viria a ser o Suriname e a Guiana, consolidando o início de uma nova era de influência do Norte Europeu.</p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Domínio Português</h3>
-                <span class="date-tag">1500 – 1822</span>
-            </div>
-            <div class="history-grid">
-                <div class="history-text">
-                    <p>Amapá e Rio Branco foram disputados entre portugueses e franceses. Bandeirantes e jesuítas exploraram a região, concentrando a presença em pequenas fortificações e missões no norte amazônico.</p>
-                    <div class="mini-tags-box"><span class="m-tag">AMAPÁ</span><span class="m-tag">RIO BRANCO</span></div>
-                </div>
-                <img src="img/portugal.png" alt="Domínio Português" class="history-img">
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="period-header">
-                <h3>Domínio Francês</h3>
-                <span class="date-tag">1503 – 1919</span>
-            </div>
-            <div class="history-grid">
-                <div class="history-text">
-                    <p>França fixou-se na região após disputas com Portugal. Oiapoque consolidou-se como fronteira sul da Guiana Francesa. A região permaneceu periférica, com vilarejos costeiros e baixa urbanização.</p>
-                    <div class="mini-tags-box"><span class="m-tag">OIAPOQUE</span></div>
-                </div>
-                <img src="img/franca.png" alt="Domínio Francês" class="history-img">
-            </div>
-        </div>
-
-        <div class="timeline-item">
-            <div class="period-header">
-                <h3>Domínio Holandês</h3>
+                <h3>Capítulo III — Colonização Neerlandesa</h3>
                 <span class="date-tag">1648 – 1715</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Tratado de Münster consolidou colônias como Suriname. Economia baseada em plantações e mão de obra escravizada. Cidades costeiras cresceram, enquanto o interior seguiu sob controle indígena.</p>
-                    <div class="mini-tags-box"><span class="m-tag">SURINAME</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloiii.png" class="history-img">
                 </div>
-                <img src="img/holanda.png" alt="Domínio Holandês" class="history-img">
+                <div class="history-text">
+                    <p>Com a retirada espanhola, a Companhia Holandesa das Índias Ocidentais assumiu o protagonismo, transformando o litoral pantanoso em um sistema produtivo de alta rentabilidade. Os neerlandeses, mestres da engenharia hidráulica, aplicaram seus conhecimentos de pôlderes e diques para drenar as planícies costeiras do Suriname. Essa transformação geográfica permitiu o surgimento de vastas plantações de cana-de-açúcar, café e cacau, sustentadas por um sistema escravagista brutal que importava milhares de africanos para as colônias de Essequibo e Demerara.
+<br><br>A administração holandesa caracterizou-se por um pragmatismo comercial rígido, onde a colônia era vista puramente como uma empresa de exportação. Cidades como Paramaribo começaram a ganhar contornos urbanos europeus, com canais que serviam tanto para o escoamento da produção quanto para a defesa contra invasores. No entanto, a brutalidade do sistema de plantação gerou o fenômeno do "quilombismo" (maroonage), onde escravizados fugiam para o interior impenetrável, estabelecendo comunidades autônomas que desafiavam constantemente a autoridade de Amsterdã.
+<br><br>No final do século XVII, as tensões globais e as sucessivas guerras anglo-neerlandesas enfraqueceram a logística das Províncias Unidas na América. A manutenção das colônias tornava-se cada vez mais custosa diante da pressão militar britânica e das revoltas internas. A transição do controle para o Reino Unido não foi abrupta, mas sim um processo de erosão econômica que culminou em 1715, quando acordos diplomáticos e pressões militares forçaram a entrega estratégica de postos-chave, redesenhando a hegemonia no norte do continente.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Domínio Britânico</h3>
+                <h3>Capítulo IV — Colonização Britânica</h3>
                 <span class="date-tag">1715 – 1799</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Império Britânico assumiu o controle. Substituiu a escravidão por trabalho contratado asiático. Houve investimento em infraestrutura, mas profundas desigualdades e tensões sociais foram geradas.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GUIANA</span><span class="m-tag">SURINAME</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloiv.png" class="history-img">
                 </div>
-                <img src="img/reinounido.png" alt="Domínio Britânico" class="history-img">
+                <div class="history-text">
+                    <p>A ascensão britânica em 1715 marcou a consolidação do modelo de "colônia de exploração" em larga escala. Sob o controle do Império Britânico, a região passou por uma reorganização administrativa que unificou diversas províncias sob uma governança centralizada. O investimento em infraestrutura portuária foi intensificado, transformando a Guiana em um dos principais polos exportadores de açúcar do império. A introdução de técnicas de moagem movidas a vapor e a expansão do crédito bancário londrino impulsionaram uma era de riqueza sem precedentes para a elite plantadora.
+<br><br>A sociedade colonial britânica era estratificada e tensa. Enquanto a aristocracia colonial vivia em mansões luxuosas em Georgetown, a massa de trabalhadores enfrentava condições deploráveis. Com a pressão crescente do movimento abolicionista na metrópole, os britânicos começaram a transição para o trabalho contratado, trazendo imigrantes da Índia e da China. Essa mudança demográfica foi fundamental para a formação da característica multiétnica da Guiana moderna, criando um caldeirão cultural de religiões, línguas e costumes que definiria o futuro da nação.
+<br><br>O domínio britânico, no entanto, começou a ser questionado no final do século XVIII, influenciado pelos ideais das revoluções americana e francesa. O custo de manter guarnições militares em um território tão vasto e hostil, somado à queda dos preços internacionais do açúcar, gerou um descontentamento crescente entre os colonos locais. O ano de 1799 tornou-se o ponto de ruptura, onde a conjunção de crises econômicas e o surgimento de uma consciência nacional embrionária levaram à declaração de independência, encerrando quase um século de submissão direta à coroa de Londres.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Período de Estabilização</h3>
-                <span class="date-tag">1799 – 1815</span>
+                <h3>Capítulo V — Independência da Guiana e do Suriname</h3>
+                <span class="date-tag">1799 e 1823</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Independência da Guiana (1799) e Suriname (1823). Início de um cenário de cooperação e administração própria, apesar da dependência agrícola inicial.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GUIANA</span><span class="m-tag">SURINAME</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capitulov.png" class="history-img">
                 </div>
-                <img src="img/estabilizacao.png" alt="Estabilização" class="history-img">
+                <div class="history-text">
+                    <p>A ruptura definitiva com o Império Britânico em 1799 foi o resultado de uma insurreição liderada pela elite mercantil local, que via nas taxas alfandegárias de Londres um entrave ao desenvolvimento regional. A Declaração de Independência da Guiana foi acompanhada pela promulgação da Constituição de 1801, um documento que, embora mantivesse certas estruturas de classe, estabelecia as bases de uma administração autônoma centrada no republicanismo. Este movimento pioneiro no norte da América do Sul serviu de farol para as aspirações de liberdade nas colônias vizinhas, consolidando a Guiana como uma jovem nação focada na exportação agrícola.
+<br><br>O Suriname, por sua vez, percorreu um caminho mais tardio de estabilização, conquistando sua soberania plena apenas em 1823. Após décadas de transição entre a influência holandesa e britânica, a nação emergiu como um Estado soberano que rapidamente buscou alinhamento diplomático com a Guiana. A independência surinamesa foi marcada por um esforço de integração interna entre as populações costeiras e as comunidades quilombolas do interior, estabelecendo um pacto de não agressão que garantiu a estabilidade nas fronteiras orientais e permitiu o florescimento de uma identidade nacional robusta.
+<br><br>O período pós-independência de ambas as nações foi caracterizado por uma cooperação econômica sem precedentes. A necessidade de proteger os sistemas fluviais compartilhados levou à assinatura de tratados de navegação e comércio, que criaram um mercado comum incipiente no Escudo das Guianas. Essa fase de "estabilização" foi crucial para provar a viabilidade das repúblicas guianenses diante do ceticismo das potências europeias, que ainda mantinham colônias em outras partes do continente, fortalecendo a ideia de uma unidade regional que viria a ser o embrião da futura Federação.
+                    </p>                
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Domínio Venezuelano</h3>
-                <span class="date-tag">1811 – 1930</span>
+                <h3>Capítulo VI — Brasil e Venezuela: Bolívar e Amazonas, Rio Branco e Amapá</h3>
+                <span class="date-tag">Sem período</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Bolívar e Amazonas incorporados à Venezuela. Com a ocupação do Essequibo em 1915, o autoritarismo de Caracas gerou insatisfação, culminando na Guerra de Independência local em 1932.</p>
-                    <div class="mini-tags-box"><span class="m-tag">BOLÍVAR</span><span class="m-tag">AMAZONAS</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capitulovi.png" class="history-img">
                 </div>
-                <img src="img/venezuela.png" alt="Domínio Venezuelano" class="history-img">
+                <div class="history-text">
+                    <p>Enquanto as Guianas centrais se tornavam independentes, as regiões periféricas de Bolívar e Amazonas foram incorporadas à nascente República da Venezuela em 1811. Entretanto, a ocupação venezuelana nessas áreas foi majoritariamente simbólica, limitada por uma geografia impenetrável e pela priorização de Caracas em consolidar o poder no norte. Ao longo do século XIX, Bolívar e Amazonas permaneceram como "fronteiras esquecidas", habitadas por populações indígenas e extrativistas que nutriam um crescente ressentimento contra o autoritarismo e o descaso do governo central venezuelano.
+<br><br>Simultaneamente, o Império do Brasil consolidava sua presença ao norte com a incorporação dos territórios do Amapá e de Rio Branco após 1822. O governo brasileiro, sediado no distante Rio de Janeiro, via nessas terras um valor puramente estratégico e de segurança nacional, promovendo uma ocupação baseada em fortificações militares e missões religiosas. A Controvérsia do Amapá, no final do século XIX, demonstrou a fragilidade das fronteiras, e embora a arbitragem tenha favorecido o Brasil, a população local sentia-se desconectada da realidade política e econômica do restante do país.
+<br><br>Essa desconexão territorial em ambos os lados da fronteira criou um vácuo de poder que facilitou o surgimento de sentimentos autonomistas. No início do século XX, tanto as populações sob domínio venezuelano quanto as sob domínio brasileiro começaram a enxergar nas repúblicas da Guiana e do Suriname um modelo de governança mais próximo e eficaz. A negligência das capitais sul-americanas, somada às crises econômicas regionais, preparou o terreno para que esses territórios buscassem novas alianças políticas, culminando em futuros movimentos revolucionários.
+                    </p>               
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Domínio Brasileiro</h3>
-                <span class="date-tag">1822 – 1936</span>
+                <h3>Capítulo VII — Oiapoque: A Guiana Francesa/Alemã</h3>
+                <span class="date-tag">Sem período</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Amapá e Rio Branco tornaram-se periféricos no Império Brasileiro. Após a Controvérsia do Amapá e movimentos separatistas dos anos 30, integraram o processo revolucionário federativo.</p>
-                    <div class="mini-tags-box"><span class="m-tag">AMAPÁ</span><span class="m-tag">RIO BRANCO</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capitulovii.png" class="history-img">
                 </div>
-                <img src="img/brasil.png" alt="Domínio Brasileiro" class="history-img">
+                <div class="history-text">
+                    <p>A região do Oiapoque possui uma trajetória singular marcada pela transição entre o colonialismo francês e o expansionismo germânico. Originalmente sob domínio francês desde o século XVI, a área funcionou como uma zona de fronteira disputada com Portugal, caracterizada por uma baixa densidade populacional e uma economia de subsistência baseada no extrativismo. A presença francesa era concentrada em vilarejos costeiros e missões, mantendo o Oiapoque como uma possessão periférica e subdesenvolvida em relação à capital Caiena, servindo muitas vezes apenas como um anteparo estratégico.
+<br><br>A virada radical ocorreu em 1919, após o término da Primeira Guerra Mundial. Com a vitória alemã no cenário europeu, a França foi forçada a ceder a região à Alemanha através do Tratado de Brest-Tropicaux. Renomeada como "Guiana Alemã", a região tornou-se um laboratório de colonização germânica nos trópicos. O governo de Berlim investiu em infraestrutura agrícola e tentou implementar um processo de germanização cultural, construindo escolas e centros administrativos com arquitetura europeia, o que gerou um choque imediato com as raízes latinas e indígenas da população local.
+<br><br>Apesar dos investimentos, o projeto da Guiana Alemã enfrentou forte resistência da geografia hostil e da resistência passiva dos habitantes originais. A tentativa de transformar o Oiapoque em uma vitrine do poderio alemão na América do Sul resultou em uma sociedade profundamente dividida e economicamente dependente de subsídios europeus. Esse isolamento cultural e a rigidez administrativa alemã acabariam por tornar a região vulnerável a crises futuras.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Período de Paz</h3>
-                <span class="date-tag">1815 – 1915</span>
+                <h3>Capítulo VIII — A Primeira Guerra Mundial</h3>
+                <span class="date-tag">1914 – 1918</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Século de relativa prosperidade para Guiana e Suriname. Consolidação da identidade nacional, investimentos em educação e desenvolvimento urbano.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GUIANA</span><span class="m-tag">SURINAME</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloviii.png" class="history-img">
                 </div>
-                <img src="img/paz.png" alt="Paz" class="history-img">
+                <div class="history-text">
+                    <p>O início da Primeira Guerra Mundial em 1914 repercutiu de forma dramática no Escudo das Guianas, alterando permanentemente a balança de poder. A Venezuela, buscando expandir sua influência e desafiar a hegemonia britânica, alinhou-se estrategicamente com as Potências Centrais lideradas pela Alemanha. Com a vitória alemã no conflito global, a Venezuela utilizou seu novo status para anexar a estratégica região do Essequibo em 1915, sob o pretexto de recuperação territorial histórica, instalando uma administração militar que gerou pânico e resistência entre os cidadãos guianenses.
+<br><br>A ocupação do Essequibo pela Venezuela provocou uma reação imediata na Guiana e no Suriname. Temendo a continuidade do expansionismo venezuelano e a instabilidade econômica, a população da Guiana realizou um referendo histórico em 1915, no qual 76,4% dos eleitores votaram pela união política com o Suriname. Essa aliança defensiva e administrativa foi o primeiro passo concreto para a sobrevivência das jovens nações contra a ameaça externa, criando um bloco de resistência democrática que se opunha ao eixo Berlim-Caracas.
+<br><br>Enquanto isso, a economia da região sofria com os bloqueios navais e a reorientação do comércio global. A Venezuela, apesar da vitória militar ao lado da Alemanha, mergulhou em uma crise financeira profunda devido aos custos da ocupação e à má gestão das novas terras. Este período de 1914 a 1918 não foi apenas uma época de guerra, mas o catalisador que forçou a Guiana e o Suriname a fundirem suas estruturas de governo, estabelecendo as bases institucionais para o que viria a ser a futura federação.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>República das Águas</h3>
-                <span class="date-tag">1915 – 1930</span>
+                <h3>Capítulo IX — Entre Guerras: A Fragilização Venezuelana</h3>
+                <span class="date-tag">1918 – 1929</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Venezuela anexa Essequibo em 1915. O restante da Guiana une-se ao Suriname em oposição à ocupação, mantendo resistência até a década de 30.</p>
-                    <div class="mini-tags-box">
-                        <span class="m-tag">BOLÍVAR</span><span class="m-tag">AMAZONAS</span><span class="m-tag">GUIANA</span><span class="m-tag">SURINAME</span>
-                    </div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloix.png" class="history-img">
                 </div>
-                <img src="img/aguas.png" alt="República das Águas" class="history-img">
+                <div class="history-text">
+                    <p>O período subsequente ao fim da Primeira Guerra Mundial foi marcado por um paradoxo geopolítico: embora a Venezuela figurasse no lado vencedor ao lado da Alemanha, sua política interna entrou em colapso. A administração militar do Essequibo revelou-se um fardo financeiro insustentável, exacerbado pela queda nos preços internacionais de matérias-primas e por uma corrupção sistêmica que drenava os cofres de Caracas. O descontentamento nas províncias de Bolívar e Amazonas cresceu exponencialmente, alimentado pelo isolamento geográfico e pela percepção de que as riquezas locais eram extraídas sem qualquer retorno social ou infraestrutural.
+<br><br>Enquanto a Venezuela se fragmentava em crises sucessivas, o bloco formado por Suriname e Guiana — República das Águas — prosperava através de reformas democráticas e de um modelo econômico resiliente. A propaganda autonomista cruzava as fronteiras, inspirando intelectuais e militares dissidentes em Bolívar e Amazonas a buscarem uma alternativa ao domínio venezuelano. Esse clima de ebulição social transformou a região em um barril de pólvora, onde o governo central de Caracas mantinha o controle apenas nominal, sustentado por guarnições militares desmotivadas e mal remuneradas.
+<br><br>O ano de 1929 marcou o auge da fragilidade venezuelana. Movimentos de resistência local começaram a coordenar ações de sabotagem e protestos em larga escala, exigindo o fim da ocupação do Essequibo e maior autonomia para o sul. A incapacidade de Caracas em responder diplomaticamente a essas demandas, optando pela repressão violenta, serviu apenas para unificar as diversas comunidades opositoras. Estava pavimentado o caminho para uma ruptura armada que não apenas buscaria a independência, mas a integração total com as democracias estáveis do leste.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Domínio Alemão</h3>
-                <span class="date-tag">1919 – 1945</span>
+                <h3>Capítulo X — A Guerra de Independência</h3>
+                <span class="date-tag">1930</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Pelo Tratado de Brest-Tropicaux, a França cede Oiapoque à Alemanha (Guiana Alemã). Tentativas de germanização falharam devido à geografia e resistência local.</p>
-                    <div class="mini-tags-box"><span class="m-tag">OIAPOQUE</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capitulox.png" class="history-img">
                 </div>
-                <img src="img/alemanha.png" alt="Domínio Alemão" class="history-img">
+                <div class="history-text">
+                    <p>Em 27 de fevereiro de 1930, iniciou-se o conflito que redefiniria as fronteiras do norte sul-americano. A chamada "Guerra de Independência" eclodiu como um levante coordenado entre a República das Águas e as milícias revolucionárias de Bolívar e Amazonas. Sob a liderança estratégica de figuras como Willem van der Meer e José Antonio Fernández, as forças aliadas utilizaram o profundo conhecimento da selva para executar táticas de guerrilha fluvial que neutralizaram a superioridade numérica do exército venezuelano, que estava mais acostumado aos combates em campo aberto.
+<br><br>A guerra foi curta, porém intensa, caracterizada por batalhas decisivas em pontos estratégicos dos rios Orinoco e Essequibo. A vitória aliada foi garantida não apenas pelo esforço militar, mas pelo colapso logístico da Venezuela, que não conseguiu sustentar suas linhas de suprimento através da densa floresta amazônica. Com a tomada do Essequibo pelas forças guianenses, a região foi oficialmente libertada, e os tratados de cessar-fogo foram assinados sob a pressão de observadores internacionais, forçando a retirada total das tropas de Caracas das terras sulistas.
+<br><br>O desfecho do conflito gerou uma mudança imediata na identidade política da região. A República das Águas permaneceu, simbolizando a união das bacias hidrográficas que agora formavam um território livre. A vitória de 1930 não foi vista apenas como um triunfo militar, mas como a prova de que a cooperação entre as diversas etnias e culturas do Escudo das Guianas era a única garantia de soberania contra o autoritarismo de potências vizinhas.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Período de Transição</h3>
-                <span class="date-tag">1930 – 1932</span>
+                <h3>Capítulo XI — Formação da Federação</h3>
+                <span class="date-tag">1932</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Guerra de Independência liderada pelo Suriname e regiões aliadas. A vitória resultou na unificação sob o nome de Federação das Guianas em 1932.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GERAL</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxi.png" class="history-img">
                 </div>
-                <img src="img/transicao.png" alt="Transição" class="history-img">
+                <div class="history-text">
+                    <p>Após dois anos de governos provisórios a necessidade de uma estrutura estatal mais robusta tornou-se evidente. Em 18 de julho de 1932, representantes de todos  os países libertados reuniram-se em Upata para assinar a Declaração de União, fundando oficialmente a Federação das Guianas. O objetivo era superar os desafios econômicos do pós-guerra através de um sistema federalista que respeitasse as autonomias locais, mas centralizasse as decisões de defesa, economia e relações exteriores, criando um bloco de poder.
+<br><br>O símbolo máximo dessa nova era foi a fundação de Porto Courantyne em 1933. Situada na Ilha de Baboon e cercada por um complexo sistema de ilhas menores, a capital foi planejada para ser o "nó" central da nação. A escolha de uma ilha para sediar o governo federal foi uma decisão estratégica de segurança e um prodígio de engenharia, representando a neutralidade administrativa e a importância vital da água na cultura nacional. A cidade cresceu rapidamente, tornando-se o coração político e o principal centro logístico da Federação.
+<br><br>Em 1935, a primeira Constituição Federal foi promulgada, oficializando os cinco estados fundadores: Guiana, Suriname, Bolívar, Amazonas e o recém-criado Delta Amacuro. Sob a presidência de Alberto Castillo, o país adotou um sistema republicano clássico, mas com nuances adaptadas à diversidade de sua população. Este período inicial, conhecido como "República das Bases", focou na alfabetização em massa, na construção de infraestrutura básica e na criação de uma força de defesa unificada, preparando a nação para os desafios expansionistas que ainda surgiriam.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>República das Bases</h3>
-                <span class="date-tag">1932 – 1960</span>
+                <h3>Capítulo XII — República das Bases: A Guerra Amazônica</h3>
+                <span class="date-tag">1937</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Fundação de Porto Courantyne em Baboon Island. Constituição de 1935 e incorporação de Amapá e Roraima após a Guerra Amazônica de 1937.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GERAL</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxii.png" class="history-img">
                 </div>
-                <img src="img/bases.png" alt="República das Bases" class="history-img">
+                <div class="history-text">
+                    <p>Enquanto a Federação se consolidava, o descontentamento nas províncias do norte brasileiro, principalmente as do Amapá e de Rio Branco atingiam seu ápice. Influenciados pelo sucesso da revolução de 1930 no país vizinho, movimentos separatistas amazônicos iniciaram uma série de levantes contra o governo central do Brasil, alegando negligência e exploração. Em 1937, a situação evoluiu para um conflito armado conhecido como a Guerra Amazônica. A Federação das Guianas, após um referendo nacional onde 68,8% da população votou pela "entrada ativa" no conflito, interveio militarmente em apoio aos revolucionários.
+<br><br>A intervenção guianense foi pautada pela proteção das populações ribeirinhas e pelo interesse em estabilizar suas fronteiras meridionais. As forças da Federação, já veteranas em combates na selva, garantiram vitórias rápidas contra as guarnições brasileiras isoladas. O desfecho da guerra levou à anexação formal dos territórios do Amapá e de Rio Branco à Federação e a Independência do restante do território. Essa expansão territorial não apenas aumentou drasticamente a área de influência da nação, mas também trouxe uma vasta riqueza em recursos naturais e uma nova base populacional que fortaleceu o exército e a economia nacional.
+<br><br>A incorporação dessas regiões marcou o fim da fase de formação territorial primária da Federação. Contudo, a vitória trouxe também o desafio de integrar populações de língua portuguesa e culturas distintas ao mosaico guianense. O governo de Castillo e seus sucessores implementaram políticas de "integração federativa", respeitando as tradições locais, mas promovendo a unidade sob o ideal do Lema "Unidades na União". A Federação das Guianas emergia, assim, como a maior potência militar e econômica do Escudo das Guianas, alterando definitivamente a geopolítica da América do Sul.
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>República do Ouro e Petróleo</h3>
-                <span class="date-tag">1960 – 1985</span>
+                <h3>Capítulo XIII — A Segunda Guerra Mundial</h3>
+                <span class="date-tag">1939 – 1945</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Incorporação do Oiapoque (1946). Boom econômico e instituição do sistema semipresidencialista na Constituição de 1979.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GERAL</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxiii.png" class="history-img">
                 </div>
-                <img src="img/ouro.png" alt="Ouro e Petróleo" class="history-img">
+                <div class="history-text">
+                    <p>O início da Segunda Guerra Mundial colocou a Federação das Guianas em uma posição estratégica e diplomática delicada. Embora a nação mantivesse uma neutralidade formal no início das hostilidades, sua proximidade com a Guiana Alemã (Oiapoque) e suas vastas reservas de matérias-primas atraíram a atenção das potências globais. Durante o conflito, a Federação serviu como um anteparo democrático na América do Sul, observando com cautela a militarização do Oiapoque pela Alemanha. A guerra interrompeu rotas comerciais tradicionais, forçando o país a acelerar seu processo de industrialização interna para suprir a escassez de produtos importados da Europa.
+<br><br>Internamente, o período foi marcado pelo governo de Victor dos Santos, que utilizou o estado de vigilância para fortalecer as instituições federais e a coesão nacional. A economia guianense experimentou um crescimento atípico, impulsionado pela demanda global por borracha e bauxita, recursos essenciais para o esforço de guerra aliado. Apesar da lealdade do Oiapoque ao Terceiro Reich, a geografia impenetrável e a superioridade da marinha guianense nos rios fronteiriços impediram que o conflito europeu transbordasse de forma agressiva para o território federativo, mantendo a região em um estado de "paz armada".
+<br><br>O fim da guerra em 1945 e a subsequente derrota da Alemanha deixaram a Guiana Alemã em um vácuo administrativo e em colapso financeiro. Sem o suporte de Berlim, a administração do Oiapoque viu-se isolada e incapaz de sustentar sua infraestrutura básica. Esse cenário de crise profunda na colônia vizinha gerou uma onda migratória em direção à Federação, pressionando o governo em Porto Courantyne a intervir para evitar um desastre humanitário e instabilidade nas fronteiras orientais, estabelecendo as bases para a última grande integração territorial do país.</p>
+                </div>
             </div>
         </div>
 
         <div class="timeline-item">
             <div class="period-header">
-                <h3>Nova República</h3>
-                <span class="date-tag">1985 – Atual</span>
+                <h3>Capítulo XIV — República das Bases: Oiapoque</h3>
+                <span class="date-tag">1945 – 1946</span>
             </div>
             <div class="history-grid">
-                <div class="history-text">
-                    <p>Modernização e expansão. Constituição de 2025 formaliza Trombetas, Guayana e os distritos de Trindade e Tobago e Tigri. Modelo regional de sustentabilidade.</p>
-                    <div class="mini-tags-box"><span class="m-tag">GERAL</span></div>
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxiv.png" class="history-img">
                 </div>
-                <img src="img/nova.png" alt="Nova República" class="history-img">
+                <div class="history-text">
+                    <p>A transição do Oiapoque de uma possessão alemã para um estado federado foi um dos processos diplomáticos mais complexos da história sul-americana. Em 1946, após intensas negociações mediadas pelas potências vencedoras da guerra, foi assinado o Tratado de Cayena. O documento reconhecia a independência da Guiana Alemã em relação à Europa, mas previa sua integração imediata à Federação das Guianas para garantir a estabilidade regional. O processo foi legitimado por um duplo plebiscito: a população do Oiapoque aprovou a entrada com 75,6% dos votos, enquanto o povo da Federação ratificou a aceitação com 71,3%.
+<br><br>A incorporação do Oiapoque trouxe desafios culturais significativos, dada a herança germânica implantada nas décadas anteriores. O governo de João Wallace, que assumira após o falecimento súbito de Bernardo Siqueira, implementou o "Plano de Reintegração Litorânea", que visava converter a infraestrutura agrícola alemã em cooperativas nacionais. A cidade de Caiena foi modernizada para servir como o principal porto de escoamento do leste, e a língua alemã, embora mantida em comunidades isoladas, foi gradualmente substituída pelo vernáculo federativo nas instituições públicas e nas escolas.
+<br><br>Com a integração do Oiapoque, a Federação das Guianas completou sua configuração territorial clássica, estendendo-se do Rio Orinoco até as margens do Rio Amazonas. Este capítulo encerrou o ciclo de expansão por conflitos ou sucessões coloniais, consolidando o país como uma unidade contígua e soberana. A partir de então, o foco do Estado deslocou-se da defesa de fronteiras para a estruturação interna, buscando transformar a vasta diversidade geográfica em uma economia integrada e autossuficiente.</p>
+                </div>
             </div>
         </div>
 
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XV — República das Bases: A Crise Instaurada</h3>
+                <span class="date-tag">1946 – 1960</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxv.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>A década de 1950, apesar de ter iniciado com o otimismo da unificação total, foi marcada por um período de estagnação econômica e tensões políticas internas. A estrutura administrativa da Constituição de 1935 mostrava sinais de esgotamento frente ao crescimento populacional e às disparidades regionais entre o litoral desenvolvido e o interior amazônico. Os governos de Ernesto Guzmán e Carlos Henrique Lopes enfrentaram greves nos setores de mineração e descontentamento entre os produtores agrícolas, que exigiam investimentos em infraestrutura que o orçamento federal, ainda dependente de exportações primárias, não conseguia sustentar.
+<br><br>A chamada "Crise das Bases" foi exacerbada pela falta de uma matriz energética nacional e pela logística precária que encarecia o transporte entre estados distantes como Rio Branco e Amazonas. Politicamente, a Federação vivia um impasse entre os defensores de uma centralização maior em Porto Courantyne e as elites estaduais que demandavam mais autonomia financeira. Esse período de incertezas, no entanto, serviu como catalisador para uma profunda autocrítica nacional, levando o Parlamento a iniciar os primeiros estudos para a reforma do sistema político e a busca por novas fontes de riqueza.
+<br><br>O fim desta era foi marcado por uma descoberta que alteraria permanentemente o destino da nação. Geólogos federais, em expedições financiadas pelo governo Lopes, confirmaram a existência de gigantescas reservas de hidrocarbonetos e depósitos de ouro em camadas profundas do subsolo amazônico e na plataforma continental. Essa descoberta trouxe um novo alento à população e preparou o cenário para a transição da "República das Bases" para a próspera "República do Ouro e do Petróleo", marcando o início de um ciclo de modernização sem precedentes na América Latina.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XVI — República do Ouro e do Petróleo: A Descoberta Que Mudou Tudo</h3>
+                <span class="date-tag">1960 – 1979</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxvi.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>A oficialização das reservas de petróleo e ouro em 1960 inaugurou uma era de transformações radicais na sociedade guianense. Sob a presidência de Hans Müller, o governo adotou uma política de nacionalismo econômico, estabelecendo empresas estatais para a exploração desses recursos. A receita gerada pelas exportações de petróleo permitiu à Federação quitar dívidas externas e iniciar o "Plano de Metas Amazônicas", que construiu rodovias transestaduais, hidrelétricas e aeroportos em regiões anteriormente isoladas. O país deixou de ser uma economia agrícola periférica para se tornar um polo de atração de capital estrangeiro e tecnologia.
+<br><br>Esse crescimento acelerado gerou uma urbanização em massa. Porto Courantyne transformou-se em uma metrópole cosmopolita, com arranha-céus e um sistema de transporte público de vanguarda, refletindo a riqueza que jorrava do subsolo. Contudo, o rápido desenvolvimento também trouxe desafios sociais, como a inflação e a necessidade de mão de obra qualificada, o que levou a grandes investimentos na educação técnica e superior. A "República do Ouro e do Petróleo" não foi apenas um período de riqueza financeira, mas de reafirmação da soberania guianense frente às flutuações do mercado global.
+<br><br>No entanto, o excesso de poder concentrado no Executivo durante o boom econômico e as lacunas da constituição antiga começaram a gerar fricções. A sociedade, agora mais urbana e instruída, passava a exigir maior participação política e uma divisão mais clara de poderes para evitar a corrupção e o autoritarismo. Esse anseio democrático culminaria na necessidade de uma nova ordem jurídica que pudesse gerir a riqueza nacional com maior transparência, preparando o terreno para a histórica Assembleia Constituinte que daria origem à nova estrutura de governo semipresidencialista.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XVII — República do Ouro e do Petróleo: A Nova Constituição</h3>
+                <span class="date-tag">1979 – 1984</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxvii.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>O amadurecimento das instituições guianenses culminou na promulgação da Constituição de 1979, um marco jurídico que buscou equilibrar a pujança econômica com a estabilidade democrática. Sob a liderança de Daniel Fernandes, a nova Carta Magna institucionalizou o sistema semipresidencialista, dividindo as funções de Estado e de Governo para evitar a personalização do poder. Este período foi marcado pela oficialização definitiva dos estados de Amapá, Rio Branco e Oiapoque, integrando-os plenamente à federação e extinguindo os últimos resquícios de seus antigos status territoriais.
+<br><br>A economia deste período foi gerida sob a ótica da segurança nacional e da justiça social. O Artigo 9º da nova constituição, que vinculou as riquezas do subsolo à União e criou o Fundo de Riqueza Soberana, permitiu que a Federação suportasse as flutuações do mercado de commodities sem comprometer o bem-estar da população. Contudo, a política interna enfrentou testes severos, como a renúncia do presidente Heinrich Krause em 1981. A sucessão pacífica por Pierre Lambert demonstrou a solidez das novas regras constitucionais, provando que o país havia superado a era das crises de sucessão.
+<br><br>Um ponto de destaque foi o plebiscito de 1981 sobre a criação do Estado de Essequibo. Com uma rejeição esmagadora de 92,1%, o povo guianense enviou uma mensagem clara: a identidade nacional estava agora consolidada na união das regiões existentes, e o trauma da divisão de 1915 não deveria ser reaberto por novas fragmentações administrativas. A "República do Ouro e do Petróleo" encerrava-se não por uma crise, mas por uma transição planejada para uma era de maior previsibilidade política e estabilidade institucional.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XVIII — Nova República: Estabilidade</h3>
+                <span class="date-tag">1985 – 2000</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxviii.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>O período final do século XX, sob a égide da "Nova República", foi caracterizado por uma alternância de poder exemplar e pela consolidação da classe média guianense. Governos como os de João Macalister e Pedro de Boer focaram na diversificação da pauta exportadora, reduzindo a dependência exclusiva do petróleo através do incentivo ao ecoturismo amazônico e à indústria de tecnologia em Porto Courantyne. A estabilidade monetária tornou-se a prioridade, permitindo que a Federação mantivesse baixos índices de inflação enquanto o restante do continente enfrentava décadas de desordem econômica.
+<br><br>Socialmente, este foi o período da "Guianização" definitiva. A integração cultural entre todos estados atingiu seu ápice com a expansão do sistema educacional federal bilíngue. O Parlamento Tricameral operava com eficiência, mediando conflitos regionais com pragmatismo. A proposta do Estado da Guayana em 1987 — oficializado em 2025 — e do Pirara em 1993 — ainda tramitando no parlamento — demonstraram que o debate sobre a organização do território permanecia vivo e democrático.
+<br><br>No plano externo, a Federação das Guianas passou a ser vista como a "Suíça Amazônica", uma voz de moderação e mediação em conflitos regionais. A infraestrutura de Porto Courantyne foi finalizada, operando inteiramente com energia limpa proveniente das hidrelétricas do interior e de parques eólicos litorâneos. O século XX encerrou-se para os guianenses com um sentimento de triunfo: a construção de uma nação próspera e multicultural em meio às maiores florestas tropicais do planeta era uma realidade incontestável.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XIX — Nova República: As Décadas Paradas</h3>
+                <span class="date-tag">2001 – 2020</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxix.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>O início do novo milênio trouxe um fenômeno sociopolítico complexo, frequentemente chamado pelos historiadores de "As Décadas Paradas". Apesar da manutenção da paz e de indicadores sociais elevados, a Federação mergulhou em um período de inércia administrativa e burocrática. Os mandatos de Henrique Barros, Guilherme Hendriks e Franz Weber foram marcados por governos de coalizão excessivamente amplos, que dificultavam a aprovação de grandes reformas estruturais. O país vivia uma "zona de conforto" econômica, onde a renda do petróleo mantinha o Estado, mas a inovação e o crescimento territorial pareciam ter estagnado.
+<br><br>Durante esse hiato de duas décadas, o sistema semipresidencialista enfrentou desafios de eficiência. A rotatividade de Primeiros-Ministros e as moções de desconfiança frequentes geraram uma percepção de "paralisia parlamentar". A infraestrutura nacional, embora de qualidade, começou a dar sinais de obsolescência frente à revolução digital global. Foi um período de introspecção, onde a sociedade guianense questionou se o modelo de 1979 ainda era capaz de responder aos anseios de uma geração que não viveu os tempos de guerra e desejava uma Federação mais agressiva no cenário internacional.
+<br><br>Essa apatia política só foi quebrada na segunda metade da década de 2010. O governo de Louis Almeida começou a sinalizar uma mudança de postura, buscando novas fronteiras diplomáticas para revitalizar a economia. O descontentamento com o "imobilismo" das décadas anteriores preparou o terreno para a ascensão de uma nova elite política que via na expansão territorial e na reforma constitucional profunda a única saída para que a Federação não se tornasse um museu de prosperidade do passado, mas continuasse como uma potência viva.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="period-header">
+                <h3>Capítulo XX — Nova República: Expansão Diplomática</h3>
+                <span class="date-tag">2021 – Atual</span>
+            </div>
+            <div class="history-grid">
+                <div class="history-img-box">
+                    <img src="img/historia/capituloxx.png" class="history-img">
+                </div>
+                <div class="history-text">
+                    <p>A década de 2020 inaugurou o que se tornou a fase mais dinâmica da história guianense contemporânea. Sob a presidência de Pierre Moreau, a Federação abandonou sua postura introspectiva e adotou a "Diplomacia da Integração Ativa". O primeiro grande marco foi o Tratado de Scarborough (2021), que integrou as ilhas de Trindade e Tobago como distritos estaduais, expandindo a influência da Federação para o Caribe. Logo em seguida, o Tratado de Faro (2022) formalizou a compra do norte do estado amazônico do Pará, dando origem ao Estado de Trombetas, uma manobra geopolítica que garantiu o controle total sobre importantes bacias hidrográficas.
+<br><br>Este ímpeto expansionista e modernizador culminou na Constituição de 2025. O novo texto constitucional reformou o Poder Legislativo para garantir uma representação mais justa para os novos estados e distritos. A criação do Distrito de Conservação Amazônica do Triângulo do Tigri reforçou o papel do país como líder ambiental global, transformando uma antiga área de disputa em um centro de cooperação científica e ecológica. A Federação reafirmou-se como um Estado Democrático de Direito robusto, onde o desenvolvimento sustentável é a prioridade absoluta.
+<br><br>Atualmente, com a posse de Moreau para seu segundo mandato e a gestão do Primeiro-Ministro Hoetmer, a Federação das Guianas apresenta-se como um modelo de sucesso único no Hemisfério Sul. A capital, Porto Courantyne, sede de organizações internacionais e centro financeiro regional, simboliza a união de povos de origens ameríndias, europeias, africanas e asiáticas sob uma única identidade nacional. A história da Federação, desde as tribos pré-coloniais até a potência tecnológica de 2025, é um testemunho da resiliência humana e da capacidade de transformar a selva e os rios em um lar de liberdade e progresso.</p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="nav-container-inferior">
+    <div class="nav-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <button id="prevBtnBottom" class="btn-nav">◀ Anterior</button>
+        <div id="paginacao" class="paginacao-numeros"></div>
+        <button id="nextBtnBottom" class="btn-nav">Próximo ▶</button>
+    </div>
+</div>
+
 </main>
 
 <div id="footer-placeholder"></div>
