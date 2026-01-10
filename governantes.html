@@ -15,24 +15,26 @@
             gap: 25px;
             margin-bottom: 50px;
         }
-
+        
         .card {
             background: var(--branco);
-            border: 1px solid #e2e8f0;
             border-left: 6px solid var(--azul);
             padding: 20px;
             border-radius: 8px;
             position: relative;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex-direction: column;
         }
-
+        
         .card:hover {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: var(--azul);
             transform: translateY(-3px);
-            border-color: var(--ouro);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-
+        
         .num-sucessao {
             position: absolute;
             top: 5px;
@@ -42,7 +44,7 @@
             color: rgba(10, 46, 82, 0.05);
             pointer-events: none;
         }
-
+        
         .partido-tag {
             font-size: 0.65rem;
             font-weight: 800;
@@ -53,21 +55,21 @@
             margin-left: 5px;
             border: 1px solid #e2e8f0;
         }
-
+        
         .badge {
             font-size: 0.6rem;
             font-weight: 800;
             padding: 3px 7px;
             border-radius: 4px;
             text-transform: uppercase;
-            display: inline-block;
+            display: inline-block !important;
             margin-bottom: 10px;
         }
         .tag-eleito { background: #dcfce7; color: #166534; }
         .tag-transicao { background: #f1f5f9; color: #475569; }
         .tag-morte { background: #fee2e2; color: #991b1b; }
         .tag-renuncia { background: #fef3c7; color: #92400e; }
-
+        
         .nome-titular {
             font-size: 1.1rem;
             font-weight: 800;
@@ -75,7 +77,7 @@
             text-transform: uppercase;
             display: block;
         }
-
+        
         .datas-mandato {
             font-size: 0.75rem;
             font-weight: 700;
@@ -111,6 +113,38 @@
         }
 
         .era-divider h2 { color: var(--azul); font-weight: 800; text-transform: uppercase; font-size: 1.4rem; }
+
+        .card-descricao {
+            max-height: 0; 
+            overflow: hidden; 
+            opacity: 0;
+            background: var(--azul);
+            color: white;
+            margin: 0 -20px 0px -25px; 
+            padding: 0 20px;
+            border-radius: 0 0 8px 8px;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease, margin-top 0.4s ease;
+        }
+
+        .card-descricao p {
+            padding: 15px 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .card:hover .card-descricao {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin: 15px -20px -30px -25px;
+        }
+
+        body.alto-contraste .card-descricao {
+            background: #000 !important;
+            border-top: 2px solid #fff;
+        }
     </style>
 </head>
 <body>
@@ -135,18 +169,27 @@
             <span class="nome-titular">Willem van der Meer</span>
             <span class="datas-mandato">27/02/1930 – 18/07/1932</span>
             <span class="label">Região</span><span class="nome-membro">República das Águas</span>
+            <div class="card-descricao">
+                <p>Atuando como o mentor intelectual do bloco, van der Meer utilizou sua influência junto às antigas redes comerciais holandesas para garantir o reconhecimento diplomático imediato da independência, enquanto implementava o "Pacto de Gestão Hídrica", um sistema de administração conjunta dos rios Courantyne e Maroni que evitou conflitos civis pela posse de terras férteis e garantiu o abastecimento logístico das tropas aliadas durante a pacificação do interior. Ele foi o responsável por estruturar o primeiro corpo diplomático profissional, enviando emissários à Liga das Nações para assegurar que a nova Federação não fosse vista como um movimento rebelde temporário, mas como um Estado soberano e estável.</p>
+            </div>
         </div>
         <div class="card">
             <span class="badge tag-transicao">Representante</span>
             <span class="nome-titular">José Antonio Fernández</span>
             <span class="datas-mandato">01/03/1930 – 18/07/1932</span>
-            <span class="label">Região</span><span class="nome-membro">Bolívar</span>
+            <span class="label">Região</span><span class="nome-membro">República de Bolívar e Delta</span>
+            <div class="card-descricao">
+                <p>Responsável pela transição das milícias revolucionárias para uma força de defesa profissional, Fernández estabeleceu o Comando Militar do Sul, onde integrou dissidentes venezuelanos e veteranos locais em uma estrutura hierárquica única, garantindo a ordem pública e a expulsão definitiva de células de resistência leais a Caracas nas zonas de mineração de ouro. Sua visão estratégica foi fundamental para a criação da Guarda de Fronteira, uma força de elite treinada para o combate em selva que serviu de lastro para a segurança nacional e permitiu a arrecadação imediata de impostos sobre a extração mineral, financiando os primeiros meses da administração pública.</p>
+            </div>
         </div>
         <div class="card">
             <span class="badge tag-transicao">Representante</span>
             <span class="nome-titular">Miguel Ángel Ruiz</span>
             <span class="datas-mandato">03/03/1930 – 18/07/1932</span>
-            <span class="label">Região</span><span class="nome-membro">Amazonas</span>
+            <span class="label">Região</span><span class="nome-membro">Estado Livre do Amazonas</span>
+            <div class="card-descricao">
+                <p>Focou sua atuação na "Diplomacia da Selva", percorrendo pessoalmente as bacias dos rios Branco e Negro para selar acordos de não agressão e cooperação com as lideranças indígenas, garantindo que a nova federação tivesse o apoio logístico das populações que conheciam as rotas secretas da floresta. Ele instaurou as primeiras leis de proteção ao extrativismo de borracha e castanha, criando cooperativas que sustentaram a economia das famílias do interior durante o hiato institucional e impedindo que a região caísse em um estado de anarquia ou sob o domínio de "coronéis" de terras brasileiros ou venezuelanos.</p>
+            </div>
         </div>
     </div>
 
@@ -156,11 +199,17 @@
             <span class="badge tag-transicao">Provisório</span>
             <span class="nome-titular">Arthur Moreland</span>
             <span class="datas-mandato">20/07/1932 – 17/07/1934</span>
+            <div class="card-descricao">
+                <p>Sua administração foi marcada pela unificação técnica da nação, onde estabeleceu a Comissão Geográfica Federal para mapear as fronteiras definitivas e coordenou a criação do Banco Central das Guianas, que extinguiu as moedas coloniais remanescentes em favor de uma paridade monetária baseada nas reservas auríferas de Bolívar. Moreland teve a visão urbanística de licitar o projeto de Porto Courantyne, escolhendo a Ilha Baboon não apenas por sua beleza, mas por ser um ponto de defesa natural inexpugnável no estuário, garantindo que a capital federal fosse um símbolo de modernidade e neutralidade entre os estados federados.</p>
+            </div>
         </div>
         <div class="card">
             <span class="badge tag-transicao">Provisório</span>
             <span class="nome-titular">Hendrik van Dijk</span>
             <span class="datas-mandato">18/07/1934 – 21/04/1935</span>
+            <div class="card-descricao">
+                <p>Como jurista de renome formado em Leiden, van Dijk presidiu a Comissão dos Doze, um grupo de notáveis encarregado de fundir os códigos civis de tradição francesa, inglesa, holandesa e ibérica em um corpo de leis coerente que deu origem à Constituição de 1935. Ele foi o arquiteto do equilíbrio entre o poder central e as províncias, assegurando que o federalismo guianense respeitasse as autonomias culturais (como o bilinguismo e as tradições religiosas) enquanto criava um Poder Executivo centralizado o suficiente para gerir a defesa nacional e as futuras crises expansionistas que o país enfrentaria nas décadas seguintes.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">01</span>
@@ -168,6 +217,9 @@
             <span class="nome-titular">Alberto Castillo <span class="partido-tag">PUN</span></span>
             <span class="datas-mandato">23/04/1935 – 17/07/1940</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Miguel Navarro <span class="partido-tag">PUN</span></span></div>
+            <div class="card-descricao">
+                <p>O primeiro presidente constitucional foi o arquiteto da infraestrutura civil e da identidade cívica da nação. Castillo priorizou a "Consolidação Urbana", transformando o projeto de Porto Courantyne em uma realidade funcional através da construção dos primeiros palácios ministeriais e do sistema de diques modernos na Ilha Baboon. Seu governo instituiu o Código de Educação Nacional, que unificou o currículo escolar em toda a Federação para mitigar as divisões linguísticas entre as regiões de influência holandesa, inglesa e espanhola, além de fundar a Guarda Nacional, garantindo que o Estado tivesse o monopólio da força sobre as milícias regionais remanescentes da guerra de 1930.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">02</span>
@@ -175,13 +227,20 @@
             <span class="nome-titular">Victor dos Santos <span class="partido-tag">PUN</span></span>
             <span class="datas-mandato">18/07/1940 – 17/07/1945</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Pierre LaFont <span class="partido-tag">PUN</span></span></div>
+            <div class="card-descricao">
+                <p>Governando durante a totalidade da Segunda Guerra Mundial, Dos Santos focou na "Soberania Armada e Autossuficiência". Ele implementou o Plano de Defesa do Escudo, que fortificou a fronteira leste com a Guiana Alemã e as zonas costeiras contra possíveis incursões navais. Economicamente, ele aproveitou a alta demanda dos Aliados por borracha e bauxita para criar o Fundo de Reserva de Guerra, uma poupança nacional que financiou a industrialização de base do país, permitindo que a Federação produzisse seus próprios tecidos, ferramentas e materiais de construção, reduzindo drasticamente a dependência de importações europeias paralisadas pelo conflito.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">03</span>
-            <span class="badge tag-morte">Falecido</span>
+            <span class="badge tag-eleito">Eleito</span>
+            <span class="badge tag-morte">Falecido em Mandato</span>
             <span class="nome-titular">Bernardo Siqueira <span class="partido-tag">FTG</span></span>
             <span class="datas-mandato">18/07/1945 – 15/03/1946</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">João Wallace <span class="partido-tag">FTG</span></span></div>
+            <div class="card-descricao">
+                <p>Embora seu mandato tenha sido tragicamente curto, Siqueira foi o líder da "Abertura Social e Expansão Popular". Ele foi o primeiro presidente a focar intensamente nos direitos trabalhistas, sancionando a Lei de Amparo ao Proletariado e iniciando o projeto de habitação popular nas periferias da capital. Sua visão diplomática era centrada na integração do Oiapoque, argumentando que a Federação não estaria completa sem o leste; ele iniciou as negociações preliminares com as potências vencedoras da 2ª Guerra para o destino da antiga colônia alemã, estabelecendo o tom humanitário que facilitaria a anexação pacífica logo após sua morte.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">04</span>
@@ -189,6 +248,9 @@
             <span class="nome-titular">João Wallace <span class="partido-tag">FTG</span></span>
             <span class="datas-mandato">15/03/1946 – 17/07/1950</span>
             <div class="equipe-box"><span class="label" style="color: #8b0000">Observação</span><span class="nome-membro">Assumiu após falecimento de Bernardo Siqueira</span></div>
+            <div class="card-descricao">
+                <p>O vice-presidente que assumiu após o falecimento de Siqueira tornou-se o "Pai da Integração Territorial". Wallace teve a habilidade diplomática de assinar o Tratado de Cayena (1946), coordenando a logística complexa de anexação do Oiapoque e transformando-o no oitavo estado da Federação. Para evitar choques culturais e econômicos, ele criou a Superintendência de Desenvolvimento Regional (SDR), que injetou capital na nova província para converter a infraestrutura colonial alemã em cooperativas nacionais de pesca e agricultura, consolidando a paz interna e a lealdade da população local ao governo de Porto Courantyne.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">05</span>
@@ -196,6 +258,9 @@
             <span class="nome-titular">Ernesto Guzmán <span class="partido-tag">PUN</span></span>
             <span class="datas-mandato">18/07/1950 – 17/07/1955</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Louis Martens <span class="partido-tag">PUN</span></span></div>
+            <div class="card-descricao">
+                <p>O governo de Guzmán foi o auge da "Integração Geográfica e Logística". Percebendo que os estados do interior, como Rio Branco e Amazonas, estavam isolados do centro econômico litorâneo, ele lançou o ambicioso Plano de Metas Viárias, que deu início à construção da Rodovia Transfederativa e de uma rede de telegrafia sem fio que cobria 90% do território nacional. Guzmán também promoveu a modernização do Exército, adquirindo tecnologias de comunicação e transporte aéreo para garantir que o governo pudesse responder rapidamente a qualquer instabilidade nas vastas e densas fronteiras da bacia amazônica.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">06</span>
@@ -203,6 +268,9 @@
             <span class="nome-titular">Carlos Henrique Lopes <span class="partido-tag">PUN</span></span>
             <span class="datas-mandato">18/07/1955 – 17/07/1960</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Julio Fernando Rivas <span class="partido-tag">PFG</span></span></div>
+            <div class="card-descricao">
+                <p>O último presidente das Bases governou em um período de transição crítica e desafios econômicos severos causados pela queda no preço das commodities agrícolas. Lopes foi um visionário que apostou na ciência como saída para a crise, criando o Instituto Nacional de Pesquisas de Solo e Subsolo, que financiou as expedições geológicas mais profundas da história do país. Seu maior legado foi a confirmação científica das gigantescas reservas de hidrocarbonetos e minerais preciosos no Escudo das Guianas, uma descoberta que ele soube blindar politicamente para que a exploração fosse controlada pelo Estado, preparando o terreno para a explosão de riqueza que definiria a era seguinte.</p>
+            </div>
         </div>
     </div>
 
@@ -214,6 +282,9 @@
             <span class="nome-titular">Hans Müller <span class="partido-tag">MPN</span></span>
             <span class="datas-mandato">18/07/1960 – 17/07/1965</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Eduardo Cardozo <span class="partido-tag">MPN</span></span></div>
+            <div class="card-descricao">
+                <p>O primeiro presidente desta nova era foi o responsável pela "Arquitetura Estatista" da Federação. Müller, utilizando sua experiência técnica, fundou a GuiaPetro e a MineraFed, garantindo que o Estado detivesse o controle majoritário sobre a extração de petróleo e ouro. Seu governo implementou a Lei de Royalties Soberanos, que obrigava a canalização de 40% dos lucros da exportação diretamente para um fundo de infraestrutura nacional, permitindo o início da construção das grandes usinas hidrelétricas no Rio Courantyne, que forneceriam energia barata para a industrialização pesada do país.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">08</span>
@@ -221,6 +292,9 @@
             <span class="nome-titular">François Dupont <span class="partido-tag">MPN</span></span>
             <span class="datas-mandato">18/07/1965 – 17/07/1970</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Alcides Pereira <span class="partido-tag">PUN</span></span></div>
+            <div class="card-descricao">
+                <p>O governo de Dupont foi marcado pela "Revolução Técnica e Acadêmica". Percebendo que a riqueza mineral exigia mão de obra qualificada, ele criou o Programa Nacional de Bolsas Exteriores, enviando milhares de estudantes para centros tecnológicos na Europa e América do Norte. Internamente, Dupont modernizou o sistema bancário federal para gerir o influxo maciço de moeda estrangeira e iniciou o projeto de Portos Profundos no Oiapoque e em Delta Amacuro, transformando a Federação em um ponto logístico central para o comércio transatlântico e consolidando o país como o principal exportador de energia da região.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">09</span>
@@ -228,6 +302,9 @@
             <span class="nome-titular">Alexandre Martins <span class="partido-tag">PFG</span></span>
             <span class="datas-mandato">18/07/1970 – 17/07/1975</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Isaac van Rijn <span class="partido-tag">PFG</span></span></div>
+            <div class="card-descricao">
+                <p>Martins focou na "Interiorização do Progresso", lançando o plano "Amazonas Vivo". Ele utilizou a riqueza do petróleo para financiar a criação de distritos industriais em cidades como Macapá e Boa Vista, oferecendo incentivos fiscais para empresas que se instalassem fora do eixo litoral. Seu governo também foi pioneiro na criação da Primeira Malha Aérea Federal, subsidiando voos para as regiões mais remotas de Bolívar e Rio Branco, garantindo que o "boom" econômico chegasse às populações ribeirinhas e indígenas, reduzindo as desigualdades históricas entre o litoral desenvolvido e o interior extrativista.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">10</span>
@@ -235,15 +312,22 @@
             <span class="nome-titular">Daniel Fernandes <span class="partido-tag">MPN</span></span>
             <span class="datas-mandato">18/07/1975 – 17/07/1980</span>
             <div class="equipe-box"><span class="label">Vice-Presidente</span><span class="nome-membro">Heinrich Krause <span class="partido-tag">MPN</span></span></div>
+            <div class="card-descricao">
+                <p>Fernandes é reconhecido como o "Arquiteto da Transição Democrática". Diante de uma sociedade que crescia em instrução e exigia maior transparência, ele liderou a transição da antiga República das Bases para o sistema Semipresidencialista moderno. Seu maior legado foi a convocação da Assembleia Constituinte de 1979, onde ele abriu mão de poderes executivos absolutos para criar a figura do Primeiro-Ministro. Fernandes blindou o Fundo de Riqueza Soberana dentro da nova Constituição, garantindo que a riqueza do petróleo fosse protegida de governos populistas e destinada exclusivamente a investimentos de longo prazo.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">11</span>
+            <span class="badge tag-eleito">Eleito</span>
             <span class="badge tag-renuncia">Renunciou</span>
             <span class="nome-titular">Heinrich Krause <span class="partido-tag">MPN</span></span>
             <span class="datas-mandato">18/07/1980 – 23/11/1981</span>
             <div class="equipe-box">
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Pierre Lambert <span class="partido-tag">PUN</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Jean-Paul Vieira <span class="partido-tag">FTG</span></span>
+                <div class="card-descricao">
+                <p>O primeiro presidente sob a Constituição de 1979 teve um mandato curto marcado pelo "Conflito de Poderes". Krause, um economista rigoroso, entrou em choque direto com o Parlamento sobre a velocidade dos investimentos sociais, enfrentando uma crise de governabilidade quando o Primeiro-Ministro Jean-Paul Vieira retirou o apoio da coalizão. Sua renúncia voluntária em 1981, embora vista como uma crise na época, é hoje celebrada pelos historiadores como o momento em que a democracia guianense provou sua maturidade, pois a transição para o vice-presidente ocorreu rigorosamente dentro da legalidade, sem qualquer intervenção militar ou ruptura institucional.</p>
+            </div>
             </div>
         </div>
         <div class="card">
@@ -254,6 +338,9 @@
             <div class="equipe-box">
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Jean-Paul Vieira <span class="partido-tag">FTG</span></span>
                 <span class="label" style="color: #8b0000">Observação</span><span class="nome-membro">Assumiu após renúncia de Heinrich Krause</span></div>
+                <div class="card-descricao">
+                <p>Assumindo após a renúncia de Krause, Lambert focou na "Estabilização e Consenso Nacional". Diplomata de carreira, ele foi o responsável por pacificar as relações entre o Executivo e o Parlamento, estabelecendo o Pacto de Unidade Nacional para garantir que a transição econômica não fosse prejudicada pela instabilidade política. Lambert priorizou a reforma do Poder Judiciário e a descentralização do Fundo de Riqueza, permitindo que os Estados tivessem maior participação direta nos lucros minerais. Seu governo preparou o terreno técnico e jurídico para as eleições gerais de 1984, encerrando o ciclo de ouro e petróleo com uma nação pacificada e institucionalmente sólida.</p>
+            </div>
         </div>
     </div>
 
@@ -268,6 +355,9 @@
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Esteban Duarte <span class="partido-tag">PFG</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Lucas André Paredes <span class="partido-tag">PUN</span></span>
             </div>
+            <div class="card-descricao">
+                <p>Como o primeiro presidente eleito após a fase de transição, Macalister focou na "Abertura e Modernização Tecnológica". Ele compreendeu que a dependência excessiva do petróleo era um risco estratégico e, por isso, instituiu o Plano de Diversificação Econômica, oferecendo subsídios para empresas de eletrônicos e tecnologia da informação que se instalassem no polo industrial de Porto Courantyne. Seu governo também foi responsável por uma reforma profunda nas telecomunicações, lançando o primeiro satélite guianense de comunicações, o Guiana-1, garantindo soberania digital e conectividade para as escolas do interior amazônico.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">14</span>
@@ -277,6 +367,9 @@
             <div class="equipe-box">
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Marcos Vicente Rocha <span class="partido-tag">PUN</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Willem Costa Navarro <span class="partido-tag">PCL</span></span>
+            </div>
+            <div class="card-descricao">
+                <p>O governo de De Boer foi o auge da "Descentralização e Identidade Nacional". Ele promoveu uma reforma tributária que transferiu 15% das receitas federais diretamente para os municípios, fortalecendo as prefeituras e incentivando o urbanismo planejado. Culturalmente, De Boer foi o patrono das artes; ele fundou o Museu da Federação e estabeleceu o feriado nacional da "União das Águas", criando símbolos cívicos que unificavam as heranças afro-guianenses, indígenas e europeias. No plano internacional, ele posicionou a Federação como um mediador de paz no Caribe, elevando o prestígio diplomático do país.</p>
             </div>
         </div>
         <div class="card">
@@ -288,6 +381,9 @@
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Cláudia Helena Ruiz <span class="partido-tag">PVG</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Helena M. Tavares <span class="partido-tag">FTG</span></span>
             </div>
+            <div class="card-descricao">
+                <p>Liderando a primeira coalizão trabalhista do século, Gonçalves focou no "Pacto de Bem-Estar Social". Aproveitando um período de alta nos preços das commodities, ele expandiu o sistema de saúde federal (o GuiaSaúde) e instituiu o Salário-Educação, um programa que pagava famílias de baixa renda para manter seus filhos na escola até o ensino superior. Sua gestão foi marcada por uma forte parceria com a Primeira-Ministra Helena Tavares, que implementou uma rigorosa política de responsabilidade fiscal, provando que era possível ampliar o gasto social sem gerar inflação, consolidando o modelo social-democrata guianense.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">16</span>
@@ -297,6 +393,9 @@
             <div class="equipe-box">
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Erick van Dalen <span class="partido-tag">PFG</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Julian Alencar Duarte <span class="partido-tag">PCL</span></span>
+            </div>
+            <div class="card-descricao">
+                <p>Torres governou sob o signo da "Globalização e Eficiência Administrativa". Seu mandato foi focado na reforma da máquina pública, introduzindo a digitalização de processos governamentais (o projeto e-Federation) e reduzindo a burocracia para abertura de empresas. Ele fortaleceu o mercado de capitais de Porto Courantyne, atraindo sedes regionais de bancos globais e transformando a capital no principal "hub" de serviços financeiros do norte da América do Sul. Foi um período de intensa prosperidade para a classe média, marcado pelo consumo de tecnologia e pela modernização da infraestrutura aeroportuária nacional.</p>
             </div>
         </div>
         <div class="card">
@@ -308,6 +407,9 @@
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Felipe Garnier <span class="partido-tag">PVG</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">François Lima Monteiro <span class="partido-tag">PCL</span></span>
             </div>
+            <div class="card-descricao">
+                <p>O governo Barros iniciou o milênio com o foco na "Soberania Ambiental e Sustentabilidade". Ele foi o responsável pela criação das Zonas de Preservação Estratégica, áreas de floresta virgem onde qualquer exploração econômica foi proibida em favor da pesquisa biotecnológica. No entanto, Barros enfrentou o início da fragmentação parlamentar extrema; a dificuldade de formar maiorias estáveis no Congresso levou ao primeiro uso recorrente de "Governos de Coalizão Instáveis", o que começou a desacelerar a aprovação de grandes reformas estruturais, dando início à percepção pública de uma política mais lenta e burocrática.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">18</span>
@@ -317,6 +419,9 @@
             <div class="equipe-box">
                 <span class="label">Vice-Presidente</span><span class="nome-membro">Daniela Arantes Legrand <span class="partido-tag">PCL</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Isabel Ruiz Corrêa <span class="partido-tag">PVG</span></span>
+            </div>
+            <div class="card-descricao">
+                <p>Hendriks tentou reativar o dinamismo nacional através do "Plano de Integração Logística Transcontinental", focando em ferrovias que ligassem o porto de Oiapoque às fronteiras de Bolívar. Contudo, seu governo ficou marcado pelos intensos Debates Ambientais vs. Econômicos. Sua Primeira-Ministra, Isabel Ruiz Corrêa, bloqueou diversos projetos de mineração em áreas sensíveis, gerando um impasse com a bancada industrial. Embora o país continuasse rico, o crescimento do PIB começou a estagnar, e a Federação passou a viver de sua renda acumulada no Fundo de Riqueza, sem lançar novas fronteiras de desenvolvimento.</p>
             </div>
         </div>
         <div class="card">
@@ -328,10 +433,14 @@
                 <span class="label">Vice-Presidente</span><span class="nome-membro">João Victor Medina <span class="partido-tag">PVG</span></span>
                 <span class="label">Primeiro-Ministro</span><span class="nome-membro">Danilo Fernández Soares <span class="partido-tag">PUN</span></span>
             </div>
+            <div class="card-descricao">
+                <p>Weber governou no ápice das chamadas "Décadas Paradas", focando seu mandato na "Consolidação da Diplomacia Científica". Ele investiu pesadamente em universidades e centros de pesquisa nuclear para fins medicinais, mantendo a Federação no topo dos índices de desenvolvimento humano (IDH). No entanto, politicamente, seu governo foi marcado por um imobilismo legislativo profundo; o Parlamento estava dividido em dezenas de siglas, e o sistema semipresidencialista parecia travar diante da falta de consenso. Weber entregou um país em paz e extremamente rico, mas com uma sociedade que clamava por uma nova liderança capaz de retomar o ímpeto expansionista e reformador dos pais fundadores.</p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">20</span>
-            <span class="badge tag-eleito" style="background:#dcfce7">Reeleito</span>
+            <span class="badge tag-eleito">Eleito</span>
+            <span class="badge tag-eleito">Reeleito</span>
             <span class="nome-titular">Louis Almeida <span class="partido-tag">UPG/PVG</span></span>
             <span class="datas-mandato">01/01/2013 – 31/12/2020</span>
             <div class="equipe-box">
@@ -340,10 +449,17 @@
                 <span class="nome-membro">Verônica Kübler da Costa <span class="partido-tag">FTG</span></span><br>
                 <span class="nome-membro">Tiago Aranha Lopes <span class="partido-tag">PCL</span></span>
             </div>
+            <div class="card-descricao">
+                <p>Almeida assumiu com o compromisso de romper o imobilismo das "Décadas Paradas" através do "Plano de Rejuvenescimento Institucional". Focado na eficiência administrativa, ele utilizou os recursos acumulados no Fundo de Riqueza para lançar o Programa de Infraestrutura 4.0, automatizando portos e integrando a malha ferroviária nacional. Sua Primeira-Ministra, Verônica Kübler da Costa, foi a arquiteta da reforma tributária que simplificou a abertura de empresas de biotecnologia, atraindo o capital que estava estagnado no setor bancário para a inovação produtiva. Foi neste período que a Federação restabeleceu sua inteligência diplomática de longo alcance, monitorando oportunidades de integração regional.
+                    <br><br>
+                Após uma reeleição esmagadora, Almeida focou na "Projeção Geopolítica de Defesa", modernizando a Marinha e a Força Aérea com tecnologia de vigilância por satélite de última geração. Sob a gestão do Primeiro-Ministro Tiago Aranha Lopes, o governo implementou o Fundo de Aquisição Territorial, uma reserva financeira estratégica destinada à expansão soberana por vias diplomáticas e comerciais. Almeida encerrou seu ciclo de oito anos tendo preparado todas as bases jurídicas e financeiras para os grandes tratados que viriam, deixando o país com a infraestrutura e o moral nacional elevados para o maior salto expansionista desde a década de 1930.
+                </p>
+            </div>
         </div>
         <div class="card">
             <span class="num-sucessao">21</span>
-            <span class="badge tag-eleito">Atual / Reeleito</span>
+            <span class="badge tag-eleito">Atual</span>
+            <span class="badge tag-eleito">Reeleito</span>
             <span class="nome-titular">Pierre Moreau <span class="partido-tag">PCL</span></span>
             <span class="datas-mandato">01/01/2021 – Atual</span>
             <div class="equipe-box">
@@ -351,6 +467,12 @@
                 <span class="label">Primeiros-Ministros</span>
                 <span class="nome-membro">Catarina Figueiredo <span class="partido-tag">PVG</span></span><br>
                 <span class="nome-membro">Omar Xavier Hoetmer <span class="partido-tag">PUN</span></span>
+            </div>
+            <div class="card-descricao">
+                <p>Moreau inaugurou a fase da "Expansão Geográfica Ativa", sendo o protagonista de conquistas territoriais históricas. Em 2021, ele celebrou a integração de Trindade e Tobago através de um complexo acordo de dívida e cooperação, e em 2022, realizou a compra estratégica do norte do Pará (Brasil), fundando o Estado de Trombetas. Sua Primeira-Ministra, Catarina Figueiredo, gerenciou a logística monumental de integração dessas populações, aplicando o "Modelo Guianense de Cidadania", que garantiu serviços públicos imediatos e infraestrutura de ponta aos novos cidadãos, evitando focos de resistência e consolidando a união sob o ideal de uma federação continental de águas e florestas.
+                    <br><br>
+                O início de seu segundo mandato é definido pela "Refundação Constitucional". Moreau promulgou a Constituição de 2025, que resolveu definitivamente o impasse entre os poderes ao modernizar o Parlamento, garantindo representação paritária entre os estados antigos e os novos territórios. Com o Primeiro-Ministro Omar Xavier Hoetmer, o governo atual foca na "Soberania Verde e Digital", transformando o Triângulo do Tigri em um polo de conservação e pesquisa internacional. Moreau é hoje a figura central de uma nação que não apenas preserva seu passado, mas redesenha ativamente o mapa da América do Sul com diplomacia, riqueza e estabilidade.
+                </p>
             </div>
         </div>
     </div>
